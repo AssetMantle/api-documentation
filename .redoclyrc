@@ -1,0 +1,7 @@
+apiTitle: AssetMantle
+splitSpec: false
+codeSamples: true
+swaggerUI: true
+travis: true
+repo: AssetMantle/API-Documentation
+oasVersion: 3.0.0
