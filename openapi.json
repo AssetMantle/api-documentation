@@ -1,0 +1,19 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "version": "1.0.0",
+      "title": "AssetMantle",
+      "termsOfService": "https://assetmantle.one",
+      "contact": {
+        "email": "hello@assetmantle.one"
+      },
+      "license": {
+        "name": "Apache 2.0"
+      },
+      "x-logo": {
+        "url": "https://assetmantle.one"
+      },
+      "description": "# Introduction\n AssetMantle is a multi-tenant NFT marketplace framework that enables creators and collectors to securely mint, own, and trade digital assets on its fast-finality blockchain."
+      
+    }
+}
