@@ -1,0 +1,23 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: AssetMantle
+  termsOfService: https://assetmantle.one
+  contact:
+    email: hello@assetmantle.one
+  license:
+    name: Apache 2.0
+  x-logo:
+    url: https://assetmantle.one
+  description: |-
+    # Introduction
+    AssetMantle is a multi-tenant NFT marketplace framework that enables creators and collectors to securely mint, own, and trade digital assets on its fast-finality blockchain.
+tags:
+- name: RPC
+  description: 'RPC Endpoint : https://rpc.assetmantle.one/'
+- name: REST
+  description: 'REST Endpoint : https://rest.assetmantle.one/'
+- name: GPRC
+  description: 'GPRC Endpoint : grpc://grpc.assetmantle.one'
+- name: WSS
+  description: 'WSS Endpoint : wss://wss.assetmantle.one'
