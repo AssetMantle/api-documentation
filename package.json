@@ -2,17 +2,17 @@
     "name": "assetmantle",
     "version": "1.0.0",
     "dependencies": {
-      "swagger-parser": "^6.0.5",
-      "swagger-repo": "^2.0.0-rc.11"
+        "swagger-parser": "^10.0.3",
+        "swagger-repo": "^1.5.1"
     },
     "private": true,
     "scripts": {
-      "start": "swagger-repo serve",
-      "build": "swagger-repo build -o web_deploy",
-      "test": "swagger-repo validate",
-      "gh-pages": "swagger-repo gh-pages"
+        "start": "swagger-repo serve",
+        "build": "swagger-repo build -o web_deploy",
+        "test": "swagger-repo validate",
+        "gh-pages": "swagger-repo gh-pages"
     },
     "devDependencies": {
-      "ws": "3.3.2"
+        "ws": "3.3.2"
     }
-  }
+}
