@@ -1,58 +1,201 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "version": "1.0.0",
-    "title": "AssetMantle",
-    "termsOfService": "https://assetmantle.one",
-    "contact": {
-      "email": "hello@assetmantle.one"
-    },
-    "license": {
-      "name": "Apache 2.0"
-    },
-    "x-logo": {
-      "url": "https://assetmantle.one"
-    },
-    "description": "# Introduction\nAssetMantle is a multi-tenant NFT marketplace framework that enables creators and collectors to securely mint, own, and trade digital assets on its fast-finality blockchain." 
+      "version": "1.0.0",
+      "title": "AssetMantle",
+      "termsOfService": "https://assetmantle.one",
+      "contact": {
+          "email": "hello@assetmantle.one"
+      },
+      "license": {
+          "name": "Apache 2.0"
+      },
+      "x-logo": {
+          "url": "https://assetmantle.one"
+      },
+      "description": "# Introduction\nAssetMantle is a multi-tenant NFT marketplace framework that enables creators and collectors to securely mint, own, and trade digital assets on its fast-finality blockchain."
   },
   "tags": [
-    {
-      "name": "RPC",
-      "description":  "RPC Endpoint : https://rpc.assetmantle.one/"
-    }
-
-  ,
-  {
-    "name": "REST",
-    "description":  "REST Endpoint : https://rest.assetmantle.one/"
-  },
-  {
-    "name": "GPRC",
-    "description":  "GPRC Endpoint : grpc://grpc.assetmantle.one"
-  },
-  {
-    "name": "WSS",
-    "description": "WSS Endpoint : wss://wss.assetmantle.one"
-  },
-  {
-    "name": "REST Endpoints",
-    "description": "Follow Rest Endpoints here: https://github.com/AssetMantle/awesome-AssetMantle"
-  },
-  {
-    "name": "Important Info",
-    "description":"Mainnet: 118, DevNet: 750"
-  },
-  {
-    "name": "REST Endpoints examples",
-    "description":"URL: https://rest.assetmantle.one/txs/<txhash>",
-    "response": "https://rest.assetmantle.one/txs/855C79BEBAA24FC983F24AFE2C2356B1F05D9125F53A9629F45907EBBD4D33E2",
-    "address": "https://rest.assetmantle.one/bank/balances/<address>",
-    "response2": "https://rest.assetmantle.one/bank/balances/mantle1907n5d2xwy3av597y6347dsc2ktpl2d9u0j4tu"
-    }
-
-
-  
-  
-]
-
+      {
+          "name": "RPC",
+          "description": "RPC Endpoint : https://rpc.assetmantle.one/"
+      },
+      {
+          "name": "REST",
+          "description": "REST Endpoint : https://rest.assetmantle.one/"
+      },
+      {
+          "name": "GPRC",
+          "description": "GPRC Endpoint : grpc://grpc.assetmantle.one"
+      },
+      {
+          "name": "WSS",
+          "description": "WSS Endpoint : wss://wss.assetmantle.one"
+      },
+      {
+          "name": "REST Endpoints",
+          "description": "Follow Rest Endpoints here: https://github.com/AssetMantle/awesome-AssetMantle"
+      },
+      {
+          "name": "Important Info",
+          "description": "Mainnet: 118, DevNet: 750"
+      },
+      {
+          "name": "REST Endpoints examples",
+          "description": "URL: https://rest.assetmantle.one/txs/<txhash>",
+          "response": "https://rest.assetmantle.one/txs/855C79BEBAA24FC983F24AFE2C2356B1F05D9125F53A9629F45907EBBD4D33E2",
+          "address": "https://rest.assetmantle.one/bank/balances/<address>",
+          "response2": "https://rest.assetmantle.one/bank/balances/mantle1907n5d2xwy3av597y6347dsc2ktpl2d9u0j4tu"
+      }
+  ],
+  "paths": {
+      "blocks/latest": {
+          "get": {
+              "tags": [
+                  "REST"
+              ],
+              "summary": "Get the latest blocks",
+              "responses": {
+                  "200": {
+                      "description": "successful operation"
+                  },
+                  "400": {
+                      "description": "Bad Request"
+                  },
+                  "404": {
+                      "description": "Block not found"
+                  }
+              }
+          }
+      },
+      "blocks/{height}": {
+          "get": {
+              "tags": [
+                  "REST"
+              ],
+              "summary": "Get a block at a certain height",
+              "parameters": [
+                  {
+                      "name": "height",
+                      "description": "height of block to get info on"
+                  }
+              ],
+              "responses": {
+                  "200": {
+                      "description": "successful operation"
+                  },
+                  "400": {
+                      "description": "Bad Request"
+                  },
+                  "404": {
+                      "description": "Block not found"
+                  }
+              }
+          }
+      },
+      "validatorsets/latest": {
+          "get": {
+              "tags": [
+                  "REST"
+              ],
+              "summary": "Get the latest validator set",
+              "responses": {
+                  "200": {
+                      "description": "successful operation"
+                  },
+                  "400": {
+                      "description": "Bad Request"
+                  },
+                  "404": {
+                      "description": "Validator Set not found"
+                  }
+              }
+          }
+      },
+      "validatorsets/{height}": {
+          "get": {
+              "tags": [
+                  "REST"
+              ],
+              "summary": "Get the validator set at certain height",
+              "parameters": [
+                  {
+                      "name": "height",
+                      "description": "height of validator set to get info on"
+                  }
+              ],
+              "responses": {
+                  "200": {
+                      "description": "successful operation"
+                  },
+                  "400": {
+                      "description": "Bad Request"
+                  },
+                  "404": {
+                      "description": "Validator Set not found"
+                  }
+              }
+          }
+      },
+      "cosmos/tx/v1beta1/txs/{hash}": {
+          "get": {
+              "200": {
+                  "description": "successful operation"
+              },
+              "400": {
+                  "description": "Bad Request"
+              },
+              "404": {
+                  "description": "Transaction not found"
+              },
+              "tags": [
+                  "REST"
+              ],
+              "summary": "Get a transaction by hash",
+              "parameters": [
+                  {
+                      "name": "hash",
+                      "description": "hash of the transaction to get info on"
+                  }
+              ],
+              "responses": null
+          }
+      },
+      "bank/total": {
+          "get": {
+              "200": {
+                  "description": "successful operation"
+              },
+              "400": {
+                  "description": "Bad Request"
+              },
+              "404": {
+                  "description": "Not found"
+              },
+              "tags": [
+                  "REST"
+              ],
+              "summary": "Get total supply of coins in a chain",
+              "responses": null
+          }
+      },
+      "bank/total/{coin}": {
+          "get": {
+              "200": {
+                  "description": "successful operation"
+              },
+              "400": {
+                  "description": "Bad Request"
+              },
+              "404": {
+                  "description": "Not found"
+              },
+              "tags": [
+                  "REST"
+              ],
+              "summary": "Get total supply of a particular coin in a chain",
+              "responses": null
+          }
+      }
+  }
 }

@@ -34,31 +34,31 @@ tags:
 
 paths:
   "blocks/latest":
-    get:  
+    get:
       tags:
         - REST
       summary: Get the latest blocks
       responses:
-        '200':
+        "200":
           description: successful operation
-        '404':
-          description: Block not found  
-        '400':
+        "404":
+          description: Block not found
+        "400":
           description: Bad Request
   "blocks/{height}":
-    get:  
+    get:
       tags:
         - REST
       summary: Get a block at a certain height
-      parameters: 
+      parameters:
         - name: height
-          description: height of block to get info on 
+          description: height of block to get info on
       responses:
-        '200':
+        "200":
           description: successful operation
-        '404':
-          description: Block not found  
-        '400':
+        "404":
+          description: Block not found
+        "400":
           description: Bad Request
   "validatorsets/latest":
     get:
@@ -66,64 +66,63 @@ paths:
         - REST
       summary: Get the latest validator set
       responses:
-        '200':
+        "200":
           description: successful operation
-        '404':
-          description: Validator Set not found  
-        '400':
+        "404":
+          description: Validator Set not found
+        "400":
           description: Bad Request
   "validatorsets/{height}":
     get:
       tags:
         - REST
       summary: Get the validator set at certain height
-      parameters: 
+      parameters:
         - name: height
           description: height of validator set to get info on
       responses:
-        '200':
+        "200":
           description: successful operation
-        '404':
-          description: Validator Set not found  
-        '400':
+        "404":
+          description: Validator Set not found
+        "400":
           description: Bad Request
-  "cosmos/tx/v1beta1/txs/{hash}"
-    get:  
-      tags:
-        - REST
-        summary: Get a transaction by hash
-        parameters:
-          -  name: hash
-             description: hash of the transaction to get info on
-        responses:
-        '200':
-          description: successful operation
-        '404':
-          description: Transaction not found  
-        '400':
-          description: Bad Request
-  "bank/total"
+  "cosmos/tx/v1beta1/txs/{hash}":
     get:
       tags:
         - REST
-        summary: Get total supply of coins in a chain
-        responses:
-        '200':
-          description: successful operation
-        '404':
-          description: Not found  
-        '400':
-          description: Bad Request
-  "bank/total/{coin}"
+      summary: Get a transaction by hash
+      parameters:
+        - name: hash
+          description: hash of the transaction to get info on
+      responses:
+      "200":
+        description: successful operation
+      "404":
+        description: Transaction not found
+      "400":
+        description: Bad Request
+  "bank/total":
     get:
       tags:
         - REST
-        summary: Get total supply of a particular coin in a chain
-        responses:
-        '200':
-          description: successful operation
-        '404':
-          description: Not found  
-        '400':
-          description: Bad Request
-
+      summary: Get total supply of coins in a chain
+      responses:
+      "200":
+        description: successful operation
+      "404":
+        description: Not found
+      "400":
+        description: Bad Request
+  "bank/total/{coin}":
+    get:
+      tags:
+        - REST
+      summary: Get total supply of a particular coin in a chain
+      responses:
+      "200":
+        description: successful operation
+      "404":
+        description: Not found
+      "400":
+        description: Bad Request
