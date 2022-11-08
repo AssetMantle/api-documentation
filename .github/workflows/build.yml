@@ -1,0 +1,16 @@
+name: Travis CI
+on: 
+  push
+branch:
+  master
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    - uses: actions/checkout@v3
+  with:
+    skip_cleanup: true
+
+    steps:
+    - name: Run Travis CI
+    - shell: bash
+     
