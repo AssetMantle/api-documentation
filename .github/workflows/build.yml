@@ -26,7 +26,7 @@ jobs:
 
       - name: validate swagger
         run: |
-          npm -i
+          npm install
           npm test
 
       - name: deploy
