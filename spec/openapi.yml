@@ -31,3 +31,142 @@ tags:
   response: https://rest.assetmantle.one/txs/855C79BEBAA24FC983F24AFE2C2356B1F05D9125F53A9629F45907EBBD4D33E2
   address: https://rest.assetmantle.one/bank/balances/<address>
   response2: https://rest.assetmantle.one/bank/balances/mantle1907n5d2xwy3av597y6347dsc2ktpl2d9u0j4tu
+paths:
+  "/minting/parameters":
+    get:
+      tags:
+        - REST
+      summary: Get the minting modules parameters
+      responses:
+        "200":
+          description: OK
+        "500":
+          description: Internal Server Error
+
+  "​/minting​/inflation":
+      get:
+        tags:
+        - REST
+      summary: Get the Current minting inflation value
+      responses:
+      "200":
+        description: OK
+      "500":
+        description: Internal Server Error
+  "/minting/annual-provisions":
+      get:
+        tags:
+        - REST 
+      summary: Get the annual provision
+      responses:
+      "200":
+        description: OK
+      "500":
+        description: Internal Server Error
+  "/supply/total"
+      get:
+        tags:
+        - Supply
+      summary: Get the total supply
+      responses:
+      "200":
+        description: OK
+      "500":
+        description: Internal Server Error
+  "/supply/total"
+      get:
+        tags:
+        - Supply
+      summary: Get the total supply
+      responses:
+      "200":
+        description: OK
+      "500":
+        description: Internal Server Error
+  "​/supply​/total​/{denomination}"
+      get:
+        tags:
+        - Supply
+      summary: Get the total denomination
+      responses:
+      "200":
+        description: OK
+      "400":
+        description: Invalid Coin Denomination
+  "/cosmos/base/tendermint/v1beta1/blocks/latest"
+        get:
+          tags:
+          - Service
+        summary: GetLatestBlock returns the latest block.
+        responses:
+        "200":
+          description: OK
+        "default":
+          description: Get An unexpected error response.
+ "/cosmos/base/tendermint/v1beta1/blocks/{height}"
+        get:
+          tags:
+          - Service
+        summary: 
+        responses:
+        "200":
+          description: OK
+        "default":
+          description: Get An unexpected error response.
+ "/cosmos/base/tendermint/v1beta1/syncing"
+        get:
+          tags:
+          - Service
+        summary: 
+        responses:
+        "200":
+          description: OK
+        "default":
+          description: Get An unexpected error response.
+ "/cosmos/base/tendermint/v1beta1/validatorsets/latest"
+        get:
+          tags:
+          - Service
+        summary: 
+        responses:
+        "200":
+          description: OK
+        "default":
+          description: Get An unexpected error response.
+ "/cosmos/base/tendermint/v1beta1/validatorsets/{height}"
+        get:
+          tags:
+          - Service
+        summary: 
+        responses:
+        "200":
+          description: OK
+        "default":
+          description: Get An unexpected error response.
+ "/cosmos​/tx​/v1beta1​/txs"
+        get:
+          tags:
+          - Service
+        summary: 
+        responses:
+        "200":
+          description: OK
+        "default":
+          description: Get An unexpected error response.
+  /cosmos/tx/v1beta1/txs/{hash}
+        get:
+          tags:
+          - Service
+        summary: GetTx fetches a tx by hash.
+        responses:
+        "200":
+          description: OK
+        "default":
+          description: An unexpected error response
+
+
+
+
+  
+
+
