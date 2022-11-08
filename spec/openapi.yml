@@ -24,7 +24,7 @@ tags:
   description: 'WSS Endpoint : wss://wss.assetmantle.one'
 - name: REST Endpoints
   description: 'Follow Rest Endpoints here: https://github.com/AssetMantle/awesome-AssetMantle'
-- name: Important Info
+- name: Important Information
   description: 'Mainnet: 118, DevNet: 750'
 - name: REST Endpoints examples
   description: 'URL: https://rest.assetmantle.one/txs/<txhash>'
