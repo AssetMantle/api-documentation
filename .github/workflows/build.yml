@@ -30,7 +30,7 @@ jobs:
           # npm test
 
       - name: deploy
-        if: ${{ github.ref_name == 'master' || github.ref_name == 'main' }}
+        # if: ${{ github.ref_name == 'master' || github.ref_name == 'main' }}
         run: |
           export GH_TOKEN=$GITHUB_TOKEN
           npm run gh-pages
