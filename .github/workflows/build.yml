@@ -20,17 +20,17 @@ jobs:
         id: npm-cache
         with:
           path: ${{ steps.npm-cache-dir.outputs.dir }}
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package.json') }}
+          key: node-${{ hashFiles('**/package.json') }}
           restore-keys: |
-            ${{ runner.os }}-node-
+            node-
 
       - name: validate swagger
         run: |
-          npm -i
-          npm test
+          npm install
+          # npm test
 
       - name: deploy
-        if: ${{ github.ref_name == "master" || github.ref_name == "main" }}
+        # if: ${{ github.ref_name == 'master' || github.ref_name == 'main' }}
         run: |
           export GH_TOKEN=$GITHUB_TOKEN
           npm run gh-pages
