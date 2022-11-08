@@ -52,7 +52,9 @@ paths:
       summary: Get a block at a certain height
       parameters:
         - name: height
+          in: path
           description: height of block to get info on
+          required: true
       responses:
         "200":
           description: successful operation
@@ -79,7 +81,9 @@ paths:
       summary: Get the validator set at certain height
       parameters:
         - name: height
+          in: path
           description: height of validator set to get info on
+          required: true
       responses:
         "200":
           description: successful operation
@@ -94,7 +98,9 @@ paths:
       summary: Get a transaction by hash
       parameters:
         - name: hash
+          in: path
           description: hash of the transaction to get info on
+          required: true
       responses:
       "200":
         description: successful operation
@@ -119,6 +125,11 @@ paths:
       tags:
         - REST
       summary: Get total supply of a particular coin in a chain
+      parameters:
+        - name: coin
+          in: path
+          description: Coin to get total supply of
+          required: true
       responses:
       "200":
         description: successful operation
@@ -126,3 +137,637 @@ paths:
         description: Not found
       "400":
         description: Bad Request
+  "bank/balances/{address}":
+    get:
+      tags:
+        - REST
+      summary: Get the account balances
+      parameters:
+        - name: address
+          in: path
+          description: Address to get balance of
+          required: true
+      responses:
+      "200":
+        description: successful operation
+      "404":
+        description: Not found
+      "400":
+        description: Bad Request
+  "auth/accounts/{address}":
+    get:
+      tags:
+        - REST
+      summary: Get the account information on blockchain
+      parameters:
+        - name: address
+          in: path
+          description: Address to get information of
+          required: true
+      responses:
+      "200":
+        description: successful operation
+      "404":
+        description: Not found
+      "400":
+        description: Bad Request
+  "staking/delegators/{delegatorAddr}/delegations":
+    get:
+      tags:
+        - REST
+      summary: Get all delegations from a delegator
+      parameters:
+        - name: delegatorAddr
+          in: path
+          description: Address of delegator to get delegations of
+          required: true
+      responses:
+      "200":
+        description: successful operation
+      "404":
+        description: Not found
+      "400":
+        description: Bad Request
+   "staking/delegators/{delegatorAddr}/delegations/{validatorAddr}":
+    get:
+      tags:
+        - REST
+      summary: Query the current delegation between a delegator and a validator
+      parameters:
+        - name: delegatorAddr
+          in: path
+          description: Address of delegator to get delegation of
+          required: true
+        - name: validatorAddr
+          in: path
+          description: Address of validator that has been delegated
+          required: true
+      responses:
+      "200":
+        description: successful operation
+      "404":
+        description: Not found
+      "400":
+        description: Bad Request
+    "staking/delegators/{delegatorAddr}/unbonding_delegators":
+    get:
+      tags:
+        - REST
+      summary: Get all unbonding delegations from a delegator
+      parameters:
+        - name: delegatorAddr
+          in: path
+          description: Address of delegator to get delegation of
+          required: true
+      responses:
+      "200":
+        description: successful operation
+      "404":
+        description: Not found
+      "400":
+        description: Bad Request
+    "staking/delegators/{delegatorAddr}/unbonding_delegators/{validatorAddr}":
+    get:
+      tags:
+        - REST
+      summary: Query all unbonding delegations between a delegator and a validator
+      parameters:
+        - name: delegatorAddr
+          in: path
+          description: Address of delegator to get unbonded delegations of
+          required: true
+        - name: validatorAddr
+          description: Address of validator that has been unbonded
+          required: true
+      responses:
+      "200":
+        description: successful operation
+      "404":
+        description: Not found
+      "400":
+        description: Bad Request
+    "staking/redelegations":
+    get:
+      tags:
+        - REST
+      summary: Get all redelegations
+      parameters: 
+        - name: delegator
+          in: query
+          description: Address of delegator that redelegated      
+          required: true
+        - name: validator_from
+          in: query
+          description: Address of validator who was previously delegated
+          required: true
+        - name: validator_to
+          in: query
+          description: Address of validator who is presently delegated
+          required: true
+    "staking/delegators/{delegatorAddr}/validators":
+    get:
+      tags:
+        - REST
+      summary: Query all validators that a delegator is bonded to
+      parameters:
+        - name: delegatorAddr
+          in: path
+          description: Address of delegator to get bonded validators of
+          required: true
+      responses:
+      "200":
+        description: successful operation
+      "404":
+        description: Not found
+      "400":
+        description: Bad Request
+    "staking/delegators/{delegatorAddr}/validators/{validatorAddr}":
+    get:
+      tags:
+        - REST
+      summary: Query a validator that a delegator is bonded to
+      parameters:
+        - name: delegatorAddr
+          in: path
+          description: Address of delegator to get bonded validator of
+          required: true
+        - name: validatorAddr
+          in: path
+          description: Address of validator to be queried
+          required: true
+      responses:
+      "200":
+        description: successful operation
+      "404":
+        description: Not found
+      "400":
+        description: Bad Request
+    "staking/validators":
+    get:
+      tags:
+        - REST
+      summary: Get all validator candidates. By default returns only bonded validators
+      parameters: 
+        - name: status
+          in: query
+          description: The validator bond status. Must be either 'bonded', 'unbonded', or 'unbonding'.
+          required: true
+        - name: page
+          in: query
+          description: Page Number
+          required: true
+        - name: limit
+          in: query
+          description: Maximum number of items on the page
+          required: true  
+      responses:
+      "200":
+        description: successful operation
+      "404":
+        description: Not found
+      "400":
+        description: Bad Request    
+    "staking/validators/{validatorAddr}":
+    get:
+      tags:
+        - REST
+      summary: Query the information from a single validator
+      parameters:
+        - name: validatorAddr
+          in: path
+          description: Address of validator to get information of
+          required: true
+      responses:
+      "200":
+        description: successful operation
+      "404":
+        description: Not found
+      "400":
+        description: Bad Request
+    "staking/validators/{validatorAddr}/delegations":
+    get:
+      tags:
+        - REST
+      summary: Get all delegations from a validator
+      parameters:
+        - name: validatorAddr
+          in: path
+          description: Address of validator to get delegations from
+          required: true
+      responses:
+      "200":
+        description: successful operation
+      "404":
+        description: Not found
+      "400":
+        description: Bad Request
+    "staking/validators/{validatorAddr}/unbonding_delegations":
+    get:
+      tags:
+        - REST
+      summary: Get all unbonding delegations from a validator
+      parameters:
+        - name: validatorAddr
+          description: Address of validator to get unbonding delegations of
+          required: true
+      responses:
+      "200":
+        description: successful operation
+      "404":
+        description: Not found
+      "400":
+        description: Bad Request
+    "staking/pool":
+    get:
+      tags:
+        - REST
+      summary: Get the current stake of the staking pool
+      responses:
+      "200":
+        description: successful operation
+      "404":
+        description: Not found
+      "400":
+        description: Bad Request
+    "staking/parameters":
+    get:
+      tags:
+        - REST
+      summary: Get the current staking parameter values
+      responses:
+      "200":
+        description: successful operation
+      "404":
+        description: Not found
+      "400":
+        description: Bad Request
+    "slashing/signing_infos":
+    get:
+      tags:
+        - REST
+      summary: Get sign info of all validators
+      parameters: 
+        - name: page
+          in: query
+          description: Page Number
+          required: true
+        - name: limit
+          in: query
+          description: Maximum number of items per page
+          required: true
+      responses:
+      "200":
+        description: successful operation
+      "404":
+        description: Not found
+      "400":
+        description: Bad Request
+    "slashing/parameters":
+    get:
+      tags: 
+        - REST  
+      summary: 'Get the current slashing parameters'
+      responses:
+      "200":
+        description: successful operation
+      "404":
+        description: Not found
+      "400":
+        description: Bad Request
+    "gov/proposals":
+    get:
+      tags: 
+        - REST  
+      summary: 'Query proposals'
+      parameters: 
+        - name: voter
+          in: query
+          description: voter address
+          required: true
+        - name: depositor
+          in: query
+          description: depositor address
+          required: true
+        - name: status
+          in: query
+          description: proposal status, valid values can be "deposit_period", "voting_period", "passed", "rejected"
+          required: true
+      responses:
+      "200":
+        description: successful operation
+      "404":
+        description: Not found
+      "400":
+        description: Bad Request
+    "gov/proposals{proposalId}":
+    get:
+      tags: 
+        - REST  
+      summary: 'Query a particular proposal'
+      parameters:
+        - name: proposalId
+          in: path
+          description: ID of proposal to be queried
+          required: true
+      responses:
+      "200":
+        description: successful operation
+      "404":
+        description: Not found
+      "400":
+        description: Bad Request
+    "gov/proposals{proposalId}/proposer":
+    get:
+      tags: 
+        - REST  
+      summary: 'Query proposer'
+      parameters:
+        - name: proposalId
+          in: path
+          description: ID of proposal to be queried
+          required: true
+      responses:
+      "200":
+        description: successful operation
+      "404":
+        description: Not found
+      "400":
+        description: Bad Request
+    "gov/proposals{proposalId}/deposits":
+    get:
+      tags: 
+        - REST  
+      summary: 'Query deposits'
+      parameters:
+        - name: proposalId
+          in: path
+          description: ID of proposal to be queried
+          required: true
+      responses:
+      "200":
+        description: successful operation
+      "404":
+        description: Not found
+      "400": 
+        description: Bad Request
+    "gov/proposals{proposalId}/deposits/{depositor}":
+    get:
+      tags: 
+        - REST  
+      summary: 'Query deposit'
+      parameters:
+        - name: proposalId
+          in: path
+          description: ID of proposal to be queried
+          required: true
+        - name: depositor
+          in: path
+          description: ID of depositor
+          required: true
+      responses:
+      "200":
+        description: successful operation
+      "404":
+        description: Not found
+      "400": 
+        description: Bad Request
+    "gov/proposals{proposalId}/votes":
+    get:
+      tags: 
+        - REST  
+      summary: 'Query Voters information by proposal ID'
+      parameters:
+        - name: proposalId
+          in: path
+          description: ID of proposal to be queried
+          required: true
+      responses:
+      "200":
+        description: successful operation
+      "404":
+        description: Not found
+      "400": 
+        description: Bad Request
+    "gov/proposals{proposalId}/votes/{voter}":
+    get:
+      tags: 
+        - REST  
+      summary: 'Query Vote information by proposal ID and voter address'
+      parameters:
+        - name: proposalId
+          in: path
+          description: ID of proposal to be queried
+          required: true
+         - name: voter
+          in: path
+          description: Voter address
+          required: true
+      responses:
+      "200":
+        description: successful operation
+      "404":
+        description: Not found
+      "400": 
+        description: Bad Request
+    "gov/proposals{proposalId}/tally":
+    get:
+      tags: 
+        - REST  
+      summary: 'Get a proposal's tally result at current time'
+      parameters:
+        - name: proposalId
+          in: path
+          description: ID of proposal to be queried
+          required: true
+      responses:
+      "200":
+        description: successful operation
+      "404":
+        description: Not found
+      "400": 
+        description: Bad Request
+    "gov/parameters/deposit":
+    get:
+      tags: 
+        - REST  
+      summary: 'Query governance deposit parameters'
+      responses:
+      "200":
+        description: successful operation
+      "404":
+        description: Not found
+      "400": 
+        description: Bad Request
+    "gov/parameters/tallying":
+    get:
+      tags: 
+        - REST  
+      summary: 'Query governance deposit parameters'
+      responses:
+      "200":
+        description: successful operation
+      "404":
+        description: Not found
+      "400": 
+        description: Bad Request
+    "gov/parameters/voting":
+    get:
+      tags: 
+        - REST  
+      summary: 'Query governance voting parameters'
+      responses:
+      "200":
+        description: successful operation
+      "404":
+        description: Not found
+      "400": 
+        description: Bad Request
+    "distribution/delegators/{delegatorAddr}/rewards":
+    get:
+      tags: 
+        - REST  
+      summary: 'Get the sum of all the rewards earned by delegations by a single delegator'
+      parameters:
+        - name: delegatorAddr
+          in: path
+          description: Address of Delegator
+          required: true
+      responses:
+      "200":
+        description: successful operation
+      "404":
+        description: Not found
+      "400": 
+        description: Bad Request
+    "distribution/delegators/{delegatorAddr}/rewards":
+    get:
+      tags: 
+        - REST  
+      summary: 'Get the sum of all the rewards earned by delegations by a single delegator'
+      parameters:
+        - name: delegatorAddr
+          in: path
+          description: Address of Delegator
+          required: true
+      responses:
+      "200":
+        description: successful operation
+      "404":
+        description: Not found
+      "400": 
+        description: Bad Request
+    "distribution/delegators/{delegatorAddr}/rewards/{validatorAddr}":
+    get:
+      tags: 
+        - REST  
+      summary: 'Query a single delegation reward by a delegator'
+      parameters:
+        - name: delegatorAddr
+          in: path
+          description: Address of Delegator
+          required: true
+        - name: validatorAddr
+          in: path
+          description: Address of Validator
+          required: true  
+      responses:
+      "200":
+        description: successful operation
+      "404":
+        description: Not found
+      "400": 
+        description: Bad Request
+    "distribution/delegators/{delegatorAddr}/withdraw_address":
+    get:
+      tags: 
+        - REST  
+      summary: 'Get the delegations' rewards withdrawal address'
+      parameters:
+        - name: delegatorAddr
+          in: path
+          description: Address of Delegator
+          required: true
+      responses:
+      "200":
+        description: successful operation
+      "404":
+        description: Not found
+      "400": 
+        description: Bad Request
+    "/distribution/validators/{validatorAddr}":
+     get:
+      tags: 
+        - REST  
+      summary: 'Query the distribution information of a single validator'
+      parameters:
+        - name: validatorAddr
+          in: path
+          description: Address of Validator
+          required: true
+      responses:
+      "200":
+        description: successful operation
+      "404":
+        description: Not found
+      "400": 
+        description: Bad Request
+    "/distribution/validators/{validatorAddr}/outstanding_rewards":
+     get:
+      tags: 
+        - REST  
+      summary: 'Fee distribution outsdtanding rewards of a single validator'
+      parameters:
+        - name: validatorAddr
+          in: path
+          description: Address of Validator
+          required: true
+      responses:
+      "200":
+        description: successful operation
+      "404":
+        description: Not found
+      "400": 
+        description: Bad Request
+    "/distribution/validators/{validatorAddr}/outstanding_rewards":
+    get:
+      tags: 
+        - REST  
+      summary: 'Query the commission and self-delegation rewards of validator.'
+      parameters:
+        - name: validatorAddr
+          in: path
+          description: Address of Validator
+          required: true
+      responses:
+      "200":
+        description: successful operation
+      "404":
+        description: Not found
+      "400": 
+        description: Bad Request
+    "/distribution/validators/community_pool":
+    get:
+      tags: 
+        - REST  
+      summary: 'Commmunity Pool Parameters'
+      responses:
+      "200":
+        description: successful operation
+      "404":
+        description: Not found
+      "400": 
+        description: Bad Request
+     "/distribution/validators/parameters":
+    get:
+      tags: 
+        - REST  
+      summary: 'Fee division parameters'
+      responses:
+      "200":
+        description: successful operation
+      "404":
+        description: Not found
+      "400": 
+        description: Bad Request
+      
+      
