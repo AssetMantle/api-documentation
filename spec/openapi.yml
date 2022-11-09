@@ -435,10 +435,77 @@ paths:
         "default":
           description: An unexpected error response
   
-
+​/ibc​/core​/channel​/v1beta1​/channels​/{channel_id}​/ports​/{port_id}​/consensus_state​/revision​/{revision_number}​/height​/{revision_height}
+         get:
+         tags:
+          - Query
+        summary: Total sequence
+         responses:
+        "200":
+          description: A successful response
+        "default":
+          description: An unexpected error response
+  /cosmos/upgrade/v1beta1/current_plan
+          get:
+         tags:
+          - Query
+        summary: Total plan
+         responses:
+        "200":
+          description: A successful response
+        "default":
+          description: An unexpected error response
+  ​/cosmos​/upgrade​/v1beta1​/applied_plan​/{name}
+      get:
+         tags:
+          - Query
+        summary: Total plan
+         responses:
+        "200":
+          description: A successful response
+        "default":
+          description: An unexpected error response
+  /cosmos/staking/v1beta1/validators/{validator_addr}/unbonding_delegations
+      get:
+         tags:
+          - Query
+        summary: Total plan
+         responses:
+        "200":
+          description: A successful response
+        "default":
+          description: An unexpected error response
+  /cosmos/staking/v1beta1/validators/{validator_addr}/delegations/{delegator_addr}/unbonding_delegation
+      get:
+         tags:
+          - Query
+        summary: Total plan
+         responses:
+        "200":
+          description: A successful response
+        "default":
+          description: An unexpected error response
   
-
-
+  ​/cosmos​/staking​/v1beta1​/validators​/{validator_addr}​/delegations​/{delegator_addr}
+       get:
+         tags:
+          - Query
+        summary: Total plan
+         responses:
+        "200":
+          description: A successful response
+        "default":
+          description: An unexpected error response
+  /cosmos/staking/v1beta1/validators/{validator_addr}/delegations
+       get:
+         tags:
+          - Query
+        summary: Total plan
+         responses:
+        "200":
+          description: A successful response
+        "default":
+          description: An unexpected error response
 
 
 
