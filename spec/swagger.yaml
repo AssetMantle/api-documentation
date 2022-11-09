@@ -111,7 +111,7 @@ paths:
   "bank/total":
     get:
       tags:
-        - REST
+        - bank
       summary: Get total supply of coins in a chain
       responses:
       "200":
@@ -123,7 +123,7 @@ paths:
   "bank/total/{coin}":
     get:
       tags:
-        - REST
+        - bank
       summary: Get total supply of a particular coin in a chain
       parameters:
         - name: coin
@@ -140,7 +140,7 @@ paths:
   "bank/balances/{address}":
     get:
       tags:
-        - REST
+        - bank
       summary: Get the account balances
       parameters:
         - name: address
@@ -157,7 +157,7 @@ paths:
   "auth/accounts/{address}":
     get:
       tags:
-        - REST
+        - auth
       summary: Get the account information on blockchain
       parameters:
         - name: address
@@ -174,7 +174,7 @@ paths:
   "staking/delegators/{delegatorAddr}/delegations":
     get:
       tags:
-        - REST
+        - staking
       summary: Get all delegations from a delegator
       parameters:
         - name: delegatorAddr
@@ -191,7 +191,7 @@ paths:
   "staking/delegators/{delegatorAddr}/delegations/{validatorAddr}":
     get:
       tags:
-        - REST
+        - staking
       summary: Query the current delegation between a delegator and a validator
       parameters:
         - name: delegatorAddr
@@ -212,7 +212,7 @@ paths:
     "staking/delegators/{delegatorAddr}/unbonding_delegators":
       get:
         tags:
-          - REST
+          - staking
         summary: Get all unbonding delegations from a delegator
         parameters:
           - name: delegatorAddr
@@ -229,7 +229,7 @@ paths:
     "staking/delegators/{delegatorAddr}/unbonding_delegators/{validatorAddr}":
       get:
         tags:
-          - REST
+          - staking
         summary: Query all unbonding delegations between a delegator and a validator
         parameters:
           - name: delegatorAddr
@@ -249,7 +249,7 @@ paths:
     "staking/redelegations":
       get:
         tags:
-          - REST
+          - staking
         summary: Get all redelegations
         parameters:
           - name: delegator
@@ -267,7 +267,7 @@ paths:
     "staking/delegators/{delegatorAddr}/validators":
       get:
         tags:
-          - REST
+          - staking
         summary: Query all validators that a delegator is bonded to
         parameters:
           - name: delegatorAddr
@@ -284,7 +284,7 @@ paths:
     "staking/delegators/{delegatorAddr}/validators/{validatorAddr}":
       get:
         tags:
-          - REST
+          - staking
         summary: Query a validator that a delegator is bonded to
         parameters:
           - name: delegatorAddr
@@ -305,7 +305,7 @@ paths:
     "staking/validators":
       get:
         tags:
-          - REST
+          - staking
         summary: Get all validator candidates. By default returns only bonded validators
         parameters:
           - name: status
@@ -330,7 +330,7 @@ paths:
     "staking/validators/{validatorAddr}":
       get:
         tags:
-          - REST
+          - staking
         summary: Query the information from a single validator
         parameters:
           - name: validatorAddr
@@ -347,7 +347,7 @@ paths:
     "staking/validators/{validatorAddr}/delegations":
       get:
         tags:
-          - REST
+          - staking
         summary: Get all delegations from a validator
         parameters:
           - name: validatorAddr
@@ -364,7 +364,7 @@ paths:
     "staking/validators/{validatorAddr}/unbonding_delegations":
       get:
         tags:
-          - REST
+          - staking
         summary: Get all unbonding delegations from a validator
         parameters:
           - name: validatorAddr
@@ -380,7 +380,7 @@ paths:
     "staking/pool":
       get:
         tags:
-          - REST
+          - staking
         summary: Get the current stake of the staking pool
         responses:
         "200":
@@ -392,7 +392,7 @@ paths:
     "staking/parameters":
       get:
         tags:
-          - REST
+          - staking
         summary: Get the current staking parameter values
         responses:
         "200":
@@ -404,7 +404,7 @@ paths:
     "slashing/signing_infos":
       get:
         tags:
-          - REST
+          - slashing
         summary: Get sign info of all validators
         parameters:
           - name: page
@@ -425,7 +425,7 @@ paths:
     "slashing/parameters":
       get:
         tags:
-          - REST
+          - slashing
         summary: "Get the current slashing parameters"
         responses:
         "200":
@@ -437,7 +437,7 @@ paths:
     "gov/proposals":
       get:
         tags:
-          - REST
+          - governance
         summary: "Query proposals"
         parameters:
           - name: voter
@@ -462,7 +462,7 @@ paths:
     "gov/proposals{proposalId}":
       get:
         tags:
-          - REST
+          - governance
         summary: "Query a particular proposal"
         parameters:
           - name: proposalId
@@ -479,7 +479,7 @@ paths:
     "gov/proposals{proposalId}/proposer":
       get:
         tags:
-          - REST
+          - governance
         summary: "Query proposer"
         parameters:
           - name: proposalId
@@ -496,7 +496,7 @@ paths:
     "gov/proposals{proposalId}/deposits":
       get:
         tags:
-          - REST
+          - governance
         summary: "Query deposits"
         parameters:
           - name: proposalId
@@ -513,7 +513,7 @@ paths:
     "gov/proposals{proposalId}/deposits/{depositor}":
       get:
         tags:
-          - REST
+          - governance
         summary: "Query deposit"
         parameters:
           - name: proposalId
@@ -534,7 +534,7 @@ paths:
     "gov/proposals{proposalId}/votes":
       get:
         tags:
-          - REST
+          - governance
         summary: "Query Voters information by proposal ID"
         parameters:
           - name: proposalId
@@ -551,7 +551,7 @@ paths:
     "gov/proposals{proposalId}/votes/{voter}":
       get:
         tags:
-          - REST
+          - governance
         summary: "Query Vote information by proposal ID and voter address"
         parameters:
           - name: proposalId
@@ -572,7 +572,7 @@ paths:
     "gov/proposals{proposalId}/tally":
       get:
         tags:
-          - REST
+          - governance
         summary: "Get a proposals tally result at current time"
         parameters:
           - name: proposalId
@@ -589,7 +589,7 @@ paths:
     "gov/parameters/deposit":
       get:
         tags:
-          - REST
+          - governance
         summary: "Query governance deposit parameters"
         responses:
         "200":
@@ -601,7 +601,7 @@ paths:
     "gov/parameters/tallying":
       get:
         tags:
-          - REST
+          - governance
         summary: "Query governance deposit parameters"
         responses:
         "200":
@@ -613,7 +613,7 @@ paths:
     "gov/parameters/voting":
       get:
         tags:
-          - REST
+          - governance
         summary: "Query governance voting parameters"
         responses:
         "200":
@@ -625,7 +625,7 @@ paths:
     "distribution/delegators/{delegatorAddr}/rewards":
       get:
         tags:
-          - REST
+          - distribution
         summary: "Get the sum of all the rewards earned by delegations by a single delegator"
         parameters:
           - name: delegatorAddr
@@ -642,7 +642,7 @@ paths:
     "distribution/delegators/{delegatorAddr}/rewards/{validatorAddr}":
       get:
         tags:
-          - REST
+          - distribution
         summary: "Query a single delegation reward by a delegator"
         parameters:
           - name: delegatorAddr
@@ -663,7 +663,7 @@ paths:
     "distribution/delegators/{delegatorAddr}/withdraw_address":
       get:
         tags:
-          - REST
+          - distribution
         summary: "Get the delegations rewards withdrawal address"
         parameters:
           - name: delegatorAddr
@@ -680,7 +680,7 @@ paths:
     "/distribution/validators/{validatorAddr}":
       get:
         tags:
-          - REST
+          - distribution
         summary: "Query the distribution information of a single validator"
         parameters:
           - name: validatorAddr
@@ -697,7 +697,7 @@ paths:
     "/distribution/validators/{validatorAddr}/outstanding_rewards":
       get:
         tags:
-          - REST
+          - distribution
         summary: "Fee distribution outsdtanding rewards of a single validator"
         parameters:
           - name: validatorAddr
@@ -714,7 +714,7 @@ paths:
     "/distribution/validators/{validatorAddr}/rewards":
       get:
         tags:
-          - REST
+          - distribution
         summary: "Query the commission and self-delegation rewards of validator."
         parameters:
           - name: validatorAddr
@@ -731,7 +731,7 @@ paths:
     "/distribution/validators/community_pool":
       get:
         tags:
-          - REST
+          - distribution
         summary: "Commmunity Pool Parameters"
         responses:
         "200":
@@ -743,7 +743,7 @@ paths:
     "/distribution/validators/parameters":
       get:
         tags:
-          - REST
+          - distribution
         summary: "Fee division parameters"
         responses:
         "200":
