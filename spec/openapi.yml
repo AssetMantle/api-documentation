@@ -163,6 +163,260 @@ paths:
           description: OK
         "default":
           description: An unexpected error response
+  /cosmos/auth/v1beta1/accounts/{address}
+        get:
+          tags:
+          - Query
+        summary: Get account returns account details based on address
+        responses:
+        "200":
+          description: A successful response
+        "default":
+          description: An unexpected error response
+  /cosmos/auth/v1beta1/params
+        get:
+          tags:
+          - Query
+        summary: Params queries of all parameters
+         responses:
+        "200":
+          description: A successful response
+        "default":
+          description: An unexpected error response
+  /cosmos/bank/v1beta1/balances/{address}
+        get:
+          tags:
+          - Query
+        summary: All balances addresses
+         responses:
+        "200":
+          description: A successful response
+        "default":
+          description: An unexpected error response
+  /cosmos/bank/v1beta1/balances/{address}/{denom}
+        get:
+         tags:
+          - Query
+        summary: All balances addresses denominators
+         responses:
+        "200":
+          description: A successful response
+        "default":
+          description: An unexpected error response
+  ​/cosmos​/bank​/v1beta1​/params
+        get:
+         tags:
+          - Query
+        summary: All params
+         responses:
+        "200":
+          description: A successful response
+        "default":
+          description: An unexpected error response
+  /cosmos/bank/v1beta1/supply
+        get:
+         tags:
+          - Query
+        summary: Total supply 
+         responses:
+        "200":
+          description: A successful response
+        "default":
+          description: An unexpected error response
+  /cosmos/bank/v1beta1/supply/{denom}
+         get:
+         tags:
+          - Query
+        summary: Total supply denoms 
+         responses:
+        "200":
+          description: A successful response
+        "default":
+          description: An unexpected error response
+  /cosmos/distribution/v1beta1/community_pool
+        get:
+         tags:
+          - Query
+        summary: Total community pool 
+         responses:
+        "200":
+          description: A successful response
+        "default":
+          description: An unexpected error response
+  /cosmos/distribution/v1beta1/delegators/{delegator_address}/rewards
+        get:
+         tags:
+          - Query
+        summary: Total delegation address 
+         responses:
+        "200":
+          description: A successful response
+        "default":
+          description: An unexpected error response
+  /cosmos/distribution/v1beta1/delegators/{delegator_address}/rewards/{validator_address}
+         get:
+         tags:
+          - Query
+        summary: Total validator address 
+         responses:
+        "200":
+          description: A successful response
+        "default":
+          description: An unexpected error response
+  /ibc/applications/transfer/v1beta1/params
+         get:
+         tags:
+          - Query
+        summary: Total parameters
+         responses:
+        "200":
+          description: A successful response
+        "default":
+          description: An unexpected error response 
+  ​/ibc​/applications​/transfer​/v1beta1​/denom_traces​/{hash}
+        get:
+         tags:
+          - Query
+        summary: Total parameters
+         responses:
+        "200":
+          description: A successful response
+        "default":
+          description: An unexpected error response 
+  /ibc/applications/transfer/v1beta1/denom_traces
+        get:
+         tags:
+          - Query
+        summary: Total denom traces
+         responses:
+        "200":
+          description: A successful response
+        "default":
+          description: An unexpected error response
+  /ibc/core/connection/v1beta1/connections/{connection_id}/consensus_state/revision/{revision_number}/height/{revision_height}
+        get:
+         tags:
+          - Query
+        summary: Total revision heights
+         responses:
+        "200":
+          description: A successful response
+        "default":
+          description: An unexpected error response
+  /ibc/core/connection/v1beta1/connections/{connection_id}/client_state
+         get:
+         tags:
+          - Query
+        summary: Total client state
+         responses:
+        "200":
+          description: A successful response
+        "default":
+          description: An unexpected error response
+  /ibc/core/connection/v1beta1/connections/{connection_id}
+        get:
+         tags:
+          - Query
+        summary: Total connection id
+         responses:
+        "200":
+          description: A successful response
+        "default":
+          description: An unexpected error response
+  /ibc/core/connection/v1beta1/client_connections/{client_id}
+        get:
+         tags:
+          - Query
+        summary: Total client id
+         responses:
+        "200":
+          description: A successful response
+        "default":
+          description: An unexpected error response
+  /ibc/core/client/v1beta1/consensus_states/{client_id}/revision/{revision_number}/height/{revision_height}
+        get:
+         tags:
+          - Query
+        summary: Total revision height
+         responses:
+        "200":
+          description: A successful response
+        "default":
+          description: An unexpected error response
+  ​/ibc​/core​/client​/v1beta1​/consensus_states​/{client_id}
+         get:
+         tags:
+          - Query
+        summary: Total client id
+         responses:
+        "200":
+          description: A successful response
+        "default":
+          description: An unexpected error response
+  /ibc/core/client/v1beta1/client_states
+         get:
+         tags:
+          - Query
+        summary: Total client states
+         responses:
+        "200":
+          description: A successful response
+        "default":
+          description: An unexpected error response
+  /ibc/client/v1beta1/params
+        get:
+         tags:
+          - Query
+        summary: Total parameters
+         responses:
+        "200":
+          description: A successful response
+        "default":
+          description: An unexpected error response
+  /ibc/core/channel/v1beta1/connections/{connection}/channels
+        get:
+         tags:
+          - Query
+        summary: Total parameters
+         responses:
+        "200":
+          description: A successful response
+        "default":
+          description: An unexpected error response
+  /ibc/core/channel/v1beta1/channels/{channel_id}/ports/{port_id}/packet_receipts/{sequence}
+         get:
+         tags:
+          - Query
+        summary: Total sequence
+         responses:
+        "200":
+          description: A successful response
+        "default":
+          description: An unexpected error response
+  
+  ​/ibc​/core​/channel​/v1beta1​/channels​/{channel_id}​/ports​/{port_id}​/packet_commitments​/{packet_commitment_sequences}​/unreceived_packets
+        get:
+         tags:
+          - Query
+        summary: Total sequence
+         responses:
+        "200":
+          description: A successful response
+        "default":
+          description: An unexpected error response
+  
+
+
+
+
+
+        
+
+
+
+        
+
+
 
 
 
