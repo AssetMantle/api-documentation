@@ -404,6 +404,38 @@ paths:
           description: A successful response
         "default":
           description: An unexpected error response
+  /ibc/core/channel/v1beta1/channels/{channel_id}/ports/{port_id}/packet_commitments/{packet_ack_sequences}/unreceived_packets
+         get:
+         tags:
+          - Query
+        summary: Total sequence
+         responses:
+        "200":
+          description: A successful response
+        "default":
+          description: An unexpected error response
+  /ibc/core/channel/v1beta1/channels/{channel_id}/ports/{port_id}/packet_commitments
+         get:
+         tags:
+          - Query
+        summary: Total sequence
+         responses:
+        "200":
+          description: A successful response
+        "default":
+          description: An unexpected error response
+  /ibc/core/channel/v1beta1/channels/{channel_id}/ports/{port_id}/packet_acks/{sequence}
+         get:
+         tags:
+          - Query
+        summary: Total sequence
+         responses:
+        "200":
+          description: A successful response
+        "default":
+          description: An unexpected error response
+  
+
   
 
 
