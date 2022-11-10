@@ -1,754 +1,1716 @@
----
-openapi: 3.0.0
-info:
-  version: 1.0.0
-  title: AssetMantle
-  termsOfService: https://assetmantle.one
-  contact:
-    email: hello@assetmantle.one
-  license:
-    name: Apache 2.0
-  x-logo:
-    url: https://assetmantle.one
-  description: |-
-    # Introduction
-    AssetMantle is a multi-tenant NFT marketplace framework that enables creators and collectors to securely mint, own, and trade digital assets on its fast-finality blockchain.
-tags:
-  - name: RPC
-    description: "RPC Endpoint : https://rpc.assetmantle.one/"
-  - name: REST
-    description: "REST Endpoint : https://rest.assetmantle.one/"
-  - name: GPRC
-    description: "GPRC Endpoint : grpc://grpc.assetmantle.one"
-  - name: WSS
-    description: "WSS Endpoint : wss://wss.assetmantle.one"
-  - name: REST Endpoints
-    description: "Follow Rest Endpoints here: https://github.com/AssetMantle/awesome-AssetMantle"
-  - name: Important Info
-    description: "Mainnet: 118, DevNet: 750"
-  - name: REST Endpoints examples
-    description: "URL: https://rest.assetmantle.one/txs/<txhash>"
-    response: https://rest.assetmantle.one/txs/855C79BEBAA24FC983F24AFE2C2356B1F05D9125F53A9629F45907EBBD4D33E2
-    address: https://rest.assetmantle.one/bank/balances/<address>
-    response2: https://rest.assetmantle.one/bank/balances/mantle1907n5d2xwy3av597y6347dsc2ktpl2d9u0j4tu
-
-paths:
-  "blocks/latest":
-    get:
-      tags:
-        - REST
-      summary: Get the latest blocks
-      responses:
-        "200":
-          description: successful operation
-        "404":
-          description: Block not found
-        "400":
-          description: Bad Request
-  "blocks/{height}":
-    get:
-      tags:
-        - REST
-      summary: Get a block at a certain height
-      parameters:
-        - name: height
-          in: path
-          description: height of block to get info on
-          required: true
-      responses:
-        "200":
-          description: successful operation
-        "404":
-          description: Block not found
-        "400":
-          description: Bad Request
-  "validatorsets/latest":
-    get:
-      tags:
-        - REST
-      summary: Get the latest validator set
-      responses:
-        "200":
-          description: successful operation
-        "404":
-          description: Validator Set not found
-        "400":
-          description: Bad Request
-  "validatorsets/{height}":
-    get:
-      tags:
-        - REST
-      summary: Get the validator set at certain height
-      parameters:
-        - name: height
-          in: path
-          description: height of validator set to get info on
-          required: true
-      responses:
-        "200":
-          description: successful operation
-        "404":
-          description: Validator Set not found
-        "400":
-          description: Bad Request
-  "cosmos/tx/v1beta1/txs/{hash}":
-    get:
-      tags:
-        - REST
-      summary: Get a transaction by hash
-      parameters:
-        - name: hash
-          in: path
-          description: hash of the transaction to get info on
-          required: true
-      responses:
-      "200":
-        description: successful operation
-      "404":
-        description: Transaction not found
-      "400":
-        description: Bad Request
-  "bank/total":
-    get:
-      tags:
-        - REST
-      summary: Get total supply of coins in a chain
-      responses:
-      "200":
-        description: successful operation
-      "404":
-        description: Not found
-      "400":
-        description: Bad Request
-  "bank/total/{coin}":
-    get:
-      tags:
-        - REST
-      summary: Get total supply of a particular coin in a chain
-      parameters:
-        - name: coin
-          in: path
-          description: Coin to get total supply of
-          required: true
-      responses:
-      "200":
-        description: successful operation
-      "404":
-        description: Not found
-      "400":
-        description: Bad Request
-  "bank/balances/{address}":
-    get:
-      tags:
-        - REST
-      summary: Get the account balances
-      parameters:
-        - name: address
-          in: path
-          description: Address to get balance of
-          required: true
-      responses:
-      "200":
-        description: successful operation
-      "404":
-        description: Not found
-      "400":
-        description: Bad Request
-  "auth/accounts/{address}":
-    get:
-      tags:
-        - REST
-      summary: Get the account information on blockchain
-      parameters:
-        - name: address
-          in: path
-          description: Address to get information of
-          required: true
-      responses:
-      "200":
-        description: successful operation
-      "404":
-        description: Not found
-      "400":
-        description: Bad Request
-  "staking/delegators/{delegatorAddr}/delegations":
-    get:
-      tags:
-        - REST
-      summary: Get all delegations from a delegator
-      parameters:
-        - name: delegatorAddr
-          in: path
-          description: Address of delegator to get delegations of
-          required: true
-      responses:
-      "200":
-        description: successful operation
-      "404":
-        description: Not found
-      "400":
-        description: Bad Request
-  "staking/delegators/{delegatorAddr}/delegations/{validatorAddr}":
-    get:
-      tags:
-        - REST
-      summary: Query the current delegation between a delegator and a validator
-      parameters:
-        - name: delegatorAddr
-          in: path
-          description: Address of delegator to get delegation of
-          required: true
-        - name: validatorAddr
-          in: path
-          description: Address of validator that has been delegated
-          required: true
-      responses:
-      "200":
-        description: successful operation
-      "404":
-        description: Not found
-      "400":
-        description: Bad Request
-    "staking/delegators/{delegatorAddr}/unbonding_delegators":
-      get:
-        tags:
-          - REST
-        summary: Get all unbonding delegations from a delegator
-        parameters:
-          - name: delegatorAddr
-            in: path
-            description: Address of delegator to get delegation of
-            required: true
-        responses:
-        "200":
-          description: successful operation
-        "404":
-          description: Not found
-        "400":
-          description: Bad Request
-    "staking/delegators/{delegatorAddr}/unbonding_delegators/{validatorAddr}":
-      get:
-        tags:
-          - REST
-        summary: Query all unbonding delegations between a delegator and a validator
-        parameters:
-          - name: delegatorAddr
-            in: path
-            description: Address of delegator to get unbonded delegations of
-            required: true
-          - name: validatorAddr
-            description: Address of validator that has been unbonded
-            required: true
-        responses:
-        "200":
-          description: successful operation
-        "404":
-          description: Not found
-        "400":
-          description: Bad Request
-    "staking/redelegations":
-      get:
-        tags:
-          - REST
-        summary: Get all redelegations
-        parameters:
-          - name: delegator
-            in: query
-            description: Address of delegator that redelegated
-            required: true
-          - name: validator_from
-            in: query
-            description: Address of validator who was previously delegated
-            required: true
-          - name: validator_to
-            in: query
-            description: Address of validator who is presently delegated
-            required: true
-    "staking/delegators/{delegatorAddr}/validators":
-      get:
-        tags:
-          - REST
-        summary: Query all validators that a delegator is bonded to
-        parameters:
-          - name: delegatorAddr
-            in: path
-            description: Address of delegator to get bonded validators of
-            required: true
-        responses:
-        "200":
-          description: successful operation
-        "404":
-          description: Not found
-        "400":
-          description: Bad Request
-    "staking/delegators/{delegatorAddr}/validators/{validatorAddr}":
-      get:
-        tags:
-          - REST
-        summary: Query a validator that a delegator is bonded to
-        parameters:
-          - name: delegatorAddr
-            in: path
-            description: Address of delegator to get bonded validator of
-            required: true
-          - name: validatorAddr
-            in: path
-            description: Address of validator to be queried
-            required: true
-        responses:
-        "200":
-          description: successful operation
-        "404":
-          description: Not found
-        "400":
-          description: Bad Request
-    "staking/validators":
-      get:
-        tags:
-          - REST
-        summary: Get all validator candidates. By default returns only bonded validators
-        parameters:
-          - name: status
-            in: query
-            description: The validator bond status. Must be either 'bonded', 'unbonded', or 'unbonding'.
-            required: true
-          - name: page
-            in: query
-            description: Page Number
-            required: true
-          - name: limit
-            in: query
-            description: Maximum number of items on the page
-            required: true
-        responses:
-        "200":
-          description: successful operation
-        "404":
-          description: Not found
-        "400":
-          description: Bad Request
-    "staking/validators/{validatorAddr}":
-      get:
-        tags:
-          - REST
-        summary: Query the information from a single validator
-        parameters:
-          - name: validatorAddr
-            in: path
-            description: Address of validator to get information of
-            required: true
-        responses:
-        "200":
-          description: successful operation
-        "404":
-          description: Not found
-        "400":
-          description: Bad Request
-    "staking/validators/{validatorAddr}/delegations":
-      get:
-        tags:
-          - REST
-        summary: Get all delegations from a validator
-        parameters:
-          - name: validatorAddr
-            in: path
-            description: Address of validator to get delegations from
-            required: true
-        responses:
-        "200":
-          description: successful operation
-        "404":
-          description: Not found
-        "400":
-          description: Bad Request
-    "staking/validators/{validatorAddr}/unbonding_delegations":
-      get:
-        tags:
-          - REST
-        summary: Get all unbonding delegations from a validator
-        parameters:
-          - name: validatorAddr
-            description: Address of validator to get unbonding delegations of
-            required: true
-        responses:
-        "200":
-          description: successful operation
-        "404":
-          description: Not found
-        "400":
-          description: Bad Request
-    "staking/pool":
-      get:
-        tags:
-          - REST
-        summary: Get the current stake of the staking pool
-        responses:
-        "200":
-          description: successful operation
-        "404":
-          description: Not found
-        "400":
-          description: Bad Request
-    "staking/parameters":
-      get:
-        tags:
-          - REST
-        summary: Get the current staking parameter values
-        responses:
-        "200":
-          description: successful operation
-        "404":
-          description: Not found
-        "400":
-          description: Bad Request
-    "slashing/signing_infos":
-      get:
-        tags:
-          - REST
-        summary: Get sign info of all validators
-        parameters:
-          - name: page
-            in: query
-            description: Page Number
-            required: true
-          - name: limit
-            in: query
-            description: Maximum number of items per page
-            required: true
-        responses:
-        "200":
-          description: successful operation
-        "404":
-          description: Not found
-        "400":
-          description: Bad Request
-    "slashing/parameters":
-      get:
-        tags:
-          - REST
-        summary: "Get the current slashing parameters"
-        responses:
-        "200":
-          description: successful operation
-        "404":
-          description: Not found
-        "400":
-          description: Bad Request
-    "gov/proposals":
-      get:
-        tags:
-          - REST
-        summary: "Query proposals"
-        parameters:
-          - name: voter
-            in: query
-            description: voter address
-            required: true
-          - name: depositor
-            in: query
-            description: depositor address
-            required: true
-          - name: status
-            in: query
-            description: proposal status, valid values can be "deposit_period", "voting_period", "passed", "rejected"
-            required: true
-        responses:
-        "200":
-          description: successful operation
-        "404":
-          description: Not found
-        "400":
-          description: Bad Request
-    "gov/proposals{proposalId}":
-      get:
-        tags:
-          - REST
-        summary: "Query a particular proposal"
-        parameters:
-          - name: proposalId
-            in: path
-            description: ID of proposal to be queried
-            required: true
-        responses:
-        "200":
-          description: successful operation
-        "404":
-          description: Not found
-        "400":
-          description: Bad Request
-    "gov/proposals{proposalId}/proposer":
-      get:
-        tags:
-          - REST
-        summary: "Query proposer"
-        parameters:
-          - name: proposalId
-            in: path
-            description: ID of proposal to be queried
-            required: true
-        responses:
-        "200":
-          description: successful operation
-        "404":
-          description: Not found
-        "400":
-          description: Bad Request
-    "gov/proposals{proposalId}/deposits":
-      get:
-        tags:
-          - REST
-        summary: "Query deposits"
-        parameters:
-          - name: proposalId
-            in: path
-            description: ID of proposal to be queried
-            required: true
-        responses:
-        "200":
-          description: successful operation
-        "404":
-          description: Not found
-        "400":
-          description: Bad Request
-    "gov/proposals{proposalId}/deposits/{depositor}":
-      get:
-        tags:
-          - REST
-        summary: "Query deposit"
-        parameters:
-          - name: proposalId
-            in: path
-            description: ID of proposal to be queried
-            required: true
-          - name: depositor
-            in: path
-            description: ID of depositor
-            required: true
-        responses:
-        "200":
-          description: successful operation
-        "404":
-          description: Not found
-        "400":
-          description: Bad Request
-    "gov/proposals{proposalId}/votes":
-      get:
-        tags:
-          - REST
-        summary: "Query Voters information by proposal ID"
-        parameters:
-          - name: proposalId
-            in: path
-            description: ID of proposal to be queried
-            required: true
-        responses:
-        "200":
-          description: successful operation
-        "404":
-          description: Not found
-        "400":
-          description: Bad Request
-    "gov/proposals{proposalId}/votes/{voter}":
-      get:
-        tags:
-          - REST
-        summary: "Query Vote information by proposal ID and voter address"
-        parameters:
-          - name: proposalId
-            in: path
-            description: ID of proposal to be queried
-            required: true
-          - name: voter
-            in: path
-            description: Voter address
-            required: true
-        responses:
-        "200":
-          description: successful operation
-        "404":
-          description: Not found
-        "400":
-          description: Bad Request
-    "gov/proposals{proposalId}/tally":
-      get:
-        tags:
-          - REST
-        summary: "Get a proposals tally result at current time"
-        parameters:
-          - name: proposalId
-            in: path
-            description: ID of proposal to be queried
-            required: true
-        responses:
-        "200":
-          description: successful operation
-        "404":
-          description: Not found
-        "400":
-          description: Bad Request
-    "gov/parameters/deposit":
-      get:
-        tags:
-          - REST
-        summary: "Query governance deposit parameters"
-        responses:
-        "200":
-          description: successful operation
-        "404":
-          description: Not found
-        "400":
-          description: Bad Request
-    "gov/parameters/tallying":
-      get:
-        tags:
-          - REST
-        summary: "Query governance deposit parameters"
-        responses:
-        "200":
-          description: successful operation
-        "404":
-          description: Not found
-        "400":
-          description: Bad Request
-    "gov/parameters/voting":
-      get:
-        tags:
-          - REST
-        summary: "Query governance voting parameters"
-        responses:
-        "200":
-          description: successful operation
-        "404":
-          description: Not found
-        "400":
-          description: Bad Request
-    "distribution/delegators/{delegatorAddr}/rewards":
-      get:
-        tags:
-          - REST
-        summary: "Get the sum of all the rewards earned by delegations by a single delegator"
-        parameters:
-          - name: delegatorAddr
-            in: path
-            description: Address of Delegator
-            required: true
-        responses:
-        "200":
-          description: successful operation
-        "404":
-          description: Not found
-        "400":
-          description: Bad Request
-    "distribution/delegators/{delegatorAddr}/rewards/{validatorAddr}":
-      get:
-        tags:
-          - REST
-        summary: "Query a single delegation reward by a delegator"
-        parameters:
-          - name: delegatorAddr
-            in: path
-            description: Address of Delegator
-            required: true
-          - name: validatorAddr
-            in: path
-            description: Address of Validator
-            required: true
-        responses:
-        "200":
-          description: successful operation
-        "404":
-          description: Not found
-        "400":
-          description: Bad Request
-    "distribution/delegators/{delegatorAddr}/withdraw_address":
-      get:
-        tags:
-          - REST
-        summary: "Get the delegations rewards withdrawal address"
-        parameters:
-          - name: delegatorAddr
-            in: path
-            description: Address of Delegator
-            required: true
-        responses:
-        "200":
-          description: successful operation
-        "404":
-          description: Not found
-        "400":
-          description: Bad Request
-    "/distribution/validators/{validatorAddr}":
-      get:
-        tags:
-          - REST
-        summary: "Query the distribution information of a single validator"
-        parameters:
-          - name: validatorAddr
-            in: path
-            description: Address of Validator
-            required: true
-        responses:
-        "200":
-          description: successful operation
-        "404":
-          description: Not found
-        "400":
-          description: Bad Request
-    "/distribution/validators/{validatorAddr}/outstanding_rewards":
-      get:
-        tags:
-          - REST
-        summary: "Fee distribution outsdtanding rewards of a single validator"
-        parameters:
-          - name: validatorAddr
-            in: path
-            description: Address of Validator
-            required: true
-        responses:
-        "200":
-          description: successful operation
-        "404":
-          description: Not found
-        "400":
-          description: Bad Request
-    "/distribution/validators/{validatorAddr}/rewards":
-      get:
-        tags:
-          - REST
-        summary: "Query the commission and self-delegation rewards of validator."
-        parameters:
-          - name: validatorAddr
-            in: path
-            description: Address of Validator
-            required: true
-        responses:
-        "200":
-          description: successful operation
-        "404":
-          description: Not found
-        "400":
-          description: Bad Request
-    "/distribution/validators/community_pool":
-      get:
-        tags:
-          - REST
-        summary: "Commmunity Pool Parameters"
-        responses:
-        "200":
-          description: successful operation
-        "404":
-          description: Not found
-        "400":
-          description: Bad Request
-    "/distribution/validators/parameters":
-      get:
-        tags:
-          - REST
-        summary: "Fee division parameters"
-        responses:
-        "200":
-          description: successful operation
-        "404":
-          description: Not found
-        "400":
-          description: Bad Request
+{
+  "openapi": "3.0.0",
+  "info":
+    {
+      "version": "1.0.0",
+      "title": "AssetMantle",
+      "termsOfService": "https://assetmantle.one",
+      "contact": { "email": "hello@assetmantle.one" },
+      "license": { "name": "Apache 2.0" },
+      "x-logo": { "url": "https://assetmantle.one" },
+      "description": "# Introduction\nAssetMantle is a multi-tenant NFT marketplace framework that enables creators and collectors to securely mint, own, and trade digital assets on its fast-finality blockchain.",
+    },
+  "tags":
+    [
+      {
+        "name": "RPC",
+        "description": "RPC Endpoint : https://rpc.assetmantle.one/",
+      },
+      {
+        "name": "REST",
+        "description": "REST Endpoint : https://rest.assetmantle.one/",
+      },
+      {
+        "name": "GPRC",
+        "description": "GPRC Endpoint : grpc://grpc.assetmantle.one",
+      },
+      {
+        "name": "WSS",
+        "description": "WSS Endpoint : wss://wss.assetmantle.one",
+      },
+      {
+        "name": "REST Endpoints",
+        "description": "Follow Rest Endpoints here: https://github.com/AssetMantle/awesome-AssetMantle",
+      },
+      { "name": "Important Info", "description": "Mainnet: 118, DevNet: 750" },
+      {
+        "name": "REST Endpoints examples",
+        "description": "URL: https://rest.assetmantle.one/txs/<txhash>",
+        "response": "https://rest.assetmantle.one/txs/855C79BEBAA24FC983F24AFE2C2356B1F05D9125F53A9629F45907EBBD4D33E2",
+        "address": "https://rest.assetmantle.one/bank/balances/<address>",
+        "response2": "https://rest.assetmantle.one/bank/balances/mantle1907n5d2xwy3av597y6347dsc2ktpl2d9u0j4tu",
+      },
+    ],
+  "paths":
+    {
+      "/blocks/latest":
+        {
+          "get":
+            {
+              "tags": ["REST"],
+              "summary": "Get the latest blocks",
+              "responses":
+                {
+                  "200": { "description": "successful operation" },
+                  "400": { "description": "Bad Request" },
+                  "404": { "description": "Block not found" },
+                },
+            },
+        },
+      "/blocks/{height}":
+        {
+          "get":
+            {
+              "tags": ["REST"],
+              "summary": "Get a block at a certain height",
+              "parameters":
+                [
+                  {
+                    "name": "height",
+                    "in": "path",
+                    "description": "height of block to get info on'",
+                    "schema": { "type": "string" },
+                    "required": true,
+                  },
+                ],
+              "responses":
+                {
+                  "200": { "description": "successful operation" },
+                  "400": { "description": "Bad Request" },
+                  "404": { "description": "Block not found" },
+                },
+            },
+        },
+      "/validatorsets/latest":
+        {
+          "get":
+            {
+              "tags": ["REST"],
+              "summary": "Get the latest validator set",
+              "responses":
+                {
+                  "200": { "description": "successful operation" },
+                  "400": { "description": "Bad Request" },
+                  "404": { "description": "Validator Set not found" },
+                },
+            },
+        },
+      "/validatorsets/{height}":
+        {
+          "get":
+            {
+              "tags": ["REST"],
+              "summary": "Get the validator set at certain height",
+              "parameters":
+                [
+                  {
+                    "name": "height",
+                    "in": "path",
+                    "description": "height of validator set to get info on",
+                    "schema": { "type": "string" },
+                    "required": true,
+                  },
+                ],
+              "responses":
+                {
+                  "200": { "description": "successful operation" },
+                  "400": { "description": "Bad Request" },
+                  "404": { "description": "Validator Set not found" },
+                },
+            },
+        },
+      "/cosmos/tx/v1beta1/txs/{hash}":
+        {
+          "get":
+            {
+              "tags": ["REST"],
+              "summary": "Get a transaction by hash",
+              "parameters":
+                [
+                  {
+                    "name": "hash",
+                    "in": "path",
+                    "description": "hash of the transaction to get info on",
+                    "schema": { "type": "string" },
+                    "required": true,
+                  },
+                ],
+              "responses":
+                {
+                  "200": { "description": "successful operation" },
+                  "400": { "description": "Bad Request" },
+                  "404": { "description": "Transaction not found" },
+                },
+            },
+        },
+      "/bank/total":
+        {
+          "get":
+            {
+              "tags": ["Bank"],
+              "summary": "Get total supply of coins in a chain",
+              "responses":
+                {
+                  "200": { "description": "successful operation" },
+                  "400": { "description": "Bad Request" },
+                  "404": { "description": "Not found" },
+                },
+            },
+        },
+      "/bank/total/{coin}":
+        {
+          "get":
+            {
+              "tags": ["Bank"],
+              "summary": "Get total supply of a particular coin in a chain",
+              "parameters":
+                [
+                  {
+                    "name": "coin",
+                    "in": "path",
+                    "description": "Coin to get total supply of",
+                    "schema": { "type": "string" },
+                    "required": true,
+                  },
+                ],
+              "responses":
+                {
+                  "200": { "description": "successful operation" },
+                  "400": { "description": "Bad Request" },
+                  "404": { "description": "Not found" },
+                },
+            },
+        },
+      "/bank/balances/{address}":
+        {
+          "get":
+            {
+              "tags": ["Bank"],
+              "summary": "Get the account balances",
+              "parameters":
+                [
+                  {
+                    "name": "address",
+                    "in": "path",
+                    "description": "Address to get balance of",
+                    "schema": { "type": "string" },
+                    "required": true,
+                  },
+                ],
+              "responses":
+                {
+                  "200": { "description": "successful operation" },
+                  "400": { "description": "Bad Request" },
+                  "404": { "description": "Not found" },
+                },
+            },
+        },
+      "/auth/accounts/{address}":
+        {
+          "get":
+            {
+              "tags": ["Auth"],
+              "summary": "Get the account information on blockchain",
+              "parameters":
+                [
+                  {
+                    "name": "address",
+                    "in": "path",
+                    "description": "Address to get information of",
+                    "schema": { "type": "string" },
+                    "required": true,
+                  },
+                ],
+              "responses":
+                {
+                  "200": { "description": "successful operation" },
+                  "400": { "description": "Bad Request" },
+                  "404": { "description": "Not found" },
+                },
+            },
+        },
+      "/staking/delegators/{delegatorAddr}/delegations":
+        {
+          "get":
+            {
+              "tags": ["Staking"],
+              "summary": "Get all delegations from a delegator",
+              "parameters":
+                [
+                  {
+                    "name": "delegatorAddr",
+                    "in": "path",
+                    "description": "Address of delegator to get delegations of",
+                    "content":
+                      {
+                        "application/json":
+                          {
+                            "schema":
+                              { "$ref": "#/components/schemas/Delegation" },
+                          },
+                      },
+                    "required": true,
+                  },
+                ],
+              "responses":
+                {
+                  "200": { "description": "successful operation" },
+                  "400": { "description": "Bad Request" },
+                  "404": { "description": "Not found" },
+                },
+            },
+          "post":
+            {
+              "tags": ["Staking"],
+              "summary": "Submit Delegation",
+              "parameters":
+                [
+                  {
+                    "name": "delegatorAddr",
+                    "in": "path",
+                    "description": "Address of delegator",
+                    "schema": { "type": "string" },
+                    "required": true,
+                  },
+                ],
+              "requestBody":
+                {
+                  "content":
+                    {
+                      "application/json":
+                        {
+                          "schema":
+                            { "$ref": "#/components/schemas/Delegation" },
+                        },
+                    },
+                },
+              "responses":
+                {
+                  "200": { "description": "successful operation" },
+                  "400": { "description": "Bad Request" },
+                  "404": { "description": "Not found" },
+                },
+            },
+        },
+      "/staking/delegators/{delegatorAddr}/delegations/{validatorAddr}":
+        {
+          "get":
+            {
+              "tags": ["Staking"],
+              "summary": "Query the current delegation between a delegator and a validator",
+              "parameters":
+                [
+                  {
+                    "name": "delegatorAddr",
+                    "in": "path",
+                    "description": "Address of delegator to get delegation of",
+                    "schema": { "type": "string" },
+                    "required": true,
+                  },
+                  {
+                    "name": "validatorAddr",
+                    "in": "path",
+                    "description": "Address of validator that has been delegated",
+                    "schema": { "type": "string" },
+                    "required": true,
+                  },
+                ],
+              "responses":
+                {
+                  "200": { "description": "successful operation" },
+                  "400": { "description": "Bad Request" },
+                  "404": { "description": "Not found" },
+                },
+            },
+        },
+      "/staking/delegators/{delegatorAddr}/unbonding_delegators":
+        {
+          "get":
+            {
+              "tags": ["Staking"],
+              "summary": "Get all unbonding delegations from a delegator",
+              "parameters":
+                [
+                  {
+                    "name": "delegatorAddr",
+                    "in": "path",
+                    "description": "Address of delegator to get delegation of",
+                    "schema": { "type": "string" },
+                    "required": true,
+                  },
+                ],
+              "responses":
+                {
+                  "200": { "description": "successful operation" },
+                  "400": { "description": "Bad Request" },
+                  "404": { "description": "Not found" },
+                },
+            },
+        },
+      "/staking/delegators/{delegatorAddr}/unbonding_delegators/{validatorAddr}":
+        {
+          "get":
+            {
+              "tags": ["Staking"],
+              "summary": "Query all unbonding delegations between a delegator and a validator",
+              "parameters":
+                [
+                  {
+                    "name": "delegatorAddr",
+                    "in": "path",
+                    "description": "Address of delegator to get unbonded delegations of",
+                    "schema": { "type": "string" },
+                    "required": true,
+                  },
+                  {
+                    "name": "validatorAddr",
+                    "in": "path",
+                    "description": "Address of validator that has been unbonded",
+                    "schema": { "type": "string" },
+                    "required": true,
+                  },
+                ],
+              "responses":
+                {
+                  "200": { "description": "successful operation" },
+                  "400": { "description": "Bad Request" },
+                  "404": { "description": "Not found" },
+                },
+            },
+        },
+      "/staking/redelegations":
+        {
+          "get":
+            {
+              "tags": ["Staking"],
+              "summary": "Get all redelegations",
+              "parameters":
+                [
+                  {
+                    "name": "delegator",
+                    "in": "query",
+                    "description": "Address of delegator that redelegated",
+                    "schema": { "type": "string" },
+                    "required": true,
+                  },
+                  {
+                    "name": "validator_from",
+                    "in": "query",
+                    "description": "Address of validator who was previously delegated",
+                    "schema": { "type": "string" },
+                    "required": true,
+                  },
+                  {
+                    "name": "validator_to",
+                    "in": "query",
+                    "description": "Address of validator who is presently delegated",
+                    "schema": { "type": "string" },
+                    "required": true,
+                  },
+                ],
+              "responses":
+                {
+                  "200": { "description": "successful operation" },
+                  "400": { "description": "Bad Request" },
+                  "404": { "description": "Not found" },
+                },
+            },
+        },
+      "/staking/delegators/{delegatorAddr}/validators":
+        {
+          "get":
+            {
+              "tags": ["Staking"],
+              "summary": "Query all validators that a delegator is bonded to",
+              "parameters":
+                [
+                  {
+                    "name": "delegatorAddr",
+                    "in": "path",
+                    "schema": { "type": "string" },
+                    "description": "Address of delegator to get bonded validators of",
+                    "required": true,
+                  },
+                ],
+              "responses":
+                {
+                  "200": { "description": "successful operation" },
+                  "400": { "description": "Bad Request" },
+                  "404": { "description": "Not found" },
+                },
+            },
+        },
+      "/staking/delegators/{delegatorAddr}/validators/{validatorAddr}":
+        {
+          "get":
+            {
+              "tags": ["Staking"],
+              "summary": "Query a validator that a delegator is bonded to",
+              "parameters":
+                [
+                  {
+                    "name": "delegatorAddr",
+                    "in": "path",
+                    "description": "Address of delegator to get bonded validator of",
+                    "schema": { "type": "string" },
+                    "required": true,
+                  },
+                  {
+                    "name": "validatorAddr",
+                    "in": "path",
+                    "description": "Address of validator to be queried",
+                    "schema": { "type": "string" },
+                    "required": true,
+                  },
+                ],
+              "responses":
+                {
+                  "200": { "description": "successful operation" },
+                  "400": { "description": "Bad Request" },
+                  "404": { "description": "Not found" },
+                },
+            },
+        },
+      "/staking/validators":
+        {
+          "get":
+            {
+              "tags": ["Staking"],
+              "summary": "Get all validator candidates. By default returns only bonded validators",
+              "parameters":
+                [
+                  {
+                    "name": "status",
+                    "in": "query",
+                    "description": "The validator bond status. Must be either 'bonded', 'unbonded', or 'unbonding'.",
+                    "schema": { "type": "string" },
+                    "required": true,
+                  },
+                  {
+                    "name": "page",
+                    "in": "query",
+                    "description": "Page Number",
+                    "schema": { "type": "string" },
+                    "required": true,
+                  },
+                  {
+                    "name": "limit",
+                    "in": "query",
+                    "description": "Maximum number of items on the page",
+                    "schema": { "type": "string" },
+                    "required": true,
+                  },
+                ],
+              "responses":
+                {
+                  "200": { "description": "successful operation" },
+                  "400": { "description": "Bad Request" },
+                  "404": { "description": "Not found" },
+                },
+            },
+        },
+      "/staking/validators/{validatorAddr}":
+        {
+          "get":
+            {
+              "tags": ["Staking"],
+              "summary": "Query the information from a single validator",
+              "parameters":
+                [
+                  {
+                    "name": "validatorAddr",
+                    "in": "path",
+                    "description": "Address of validator to get information of",
+                    "schema": { "type": "string" },
+                    "required": true,
+                  },
+                ],
+              "responses":
+                {
+                  "200": { "description": "successful operation" },
+                  "400": { "description": "Bad Request" },
+                  "404": { "description": "Not found" },
+                },
+            },
+        },
+      "/staking/validators/{validatorAddr}/delegations":
+        {
+          "get":
+            {
+              "tags": ["Staking"],
+              "summary": "Get all delegations from a validator",
+              "parameters":
+                [
+                  {
+                    "name": "validatorAddr",
+                    "in": "path",
+                    "description": "Address of validator to get delegations from",
+                    "schema": { "type": "string" },
+                    "required": true,
+                  },
+                ],
+              "responses":
+                {
+                  "200": { "description": "successful operation" },
+                  "400": { "description": "Bad Request" },
+                  "404": { "description": "Not found" },
+                },
+            },
+        },
+      "/staking/validators/{validatorAddr}/unbonding_delegations":
+        {
+          "get":
+            {
+              "tags": ["Staking"],
+              "summary": "Get all unbonding delegations from a validator",
+              "parameters":
+                [
+                  {
+                    "name": "validatorAddr",
+                    "in": "path",
+                    "description": "Address of validator to get unbonding delegations of",
+                    "schema": { "type": "string" },
+                    "required": true,
+                  },
+                ],
+              "responses":
+                {
+                  "200": { "description": "successful operation" },
+                  "400": { "description": "Bad Request" },
+                  "404": { "description": "Not found" },
+                },
+            },
+        },
+      "/staking/pool":
+        {
+          "get":
+            {
+              "tags": ["Staking"],
+              "summary": "Get the current stake of the staking pool",
+              "responses":
+                {
+                  "200": { "description": "successful operation" },
+                  "400": { "description": "Bad Request" },
+                  "404": { "description": "Not found" },
+                },
+            },
+        },
+      "/staking/parameters":
+        {
+          "get":
+            {
+              "tags": ["Staking"],
+              "summary": "Get the current staking parameter values",
+              "responses":
+                {
+                  "200": { "description": "successful operation" },
+                  "400": { "description": "Bad Request" },
+                  "404": { "description": "Not found" },
+                },
+            },
+        },
+      "/slashing/signing_infos":
+        {
+          "get":
+            {
+              "tags": ["Slashing"],
+              "summary": "Get sign info of all validators",
+              "parameters":
+                [
+                  {
+                    "name": "page",
+                    "in": "query",
+                    "description": "Page Number",
+                    "schema": { "type": "string" },
+                    "required": true,
+                  },
+                  {
+                    "name": "limit",
+                    "in": "query",
+                    "description": "Maximum number of items per page",
+                    "schema": { "type": "string" },
+                    "required": true,
+                  },
+                ],
+              "responses":
+                {
+                  "200": { "description": "successful operation" },
+                  "400": { "description": "Bad Request" },
+                  "404": { "description": "Not found" },
+                },
+            },
+        },
+      "/slashing/parameters":
+        {
+          "get":
+            {
+              "tags": ["Slashing"],
+              "summary": "Get the current slashing parameters",
+              "responses":
+                {
+                  "200": { "description": "successful operation" },
+                  "400": { "description": "Bad Request" },
+                  "404": { "description": "Not found" },
+                },
+            },
+        },
+      "/gov/proposals":
+        {
+          "get":
+            {
+              "tags": ["Governance"],
+              "summary": "Query proposals",
+              "parameters":
+                [
+                  {
+                    "name": "voter",
+                    "in": "query",
+                    "description": "voter address",
+                    "schema": { "type": "string" },
+                    "required": true,
+                  },
+                  {
+                    "name": "depositor",
+                    "in": "query",
+                    "description": "depositor address",
+                    "schema": { "type": "string" },
+                    "required": true,
+                  },
+                  {
+                    "name": "status",
+                    "in": "query",
+                    "description": 'proposal status, valid values can be "deposit_period", "voting_period", "passed", "rejected"',
+                    "schema": { "type": "string" },
+                    "required": true,
+                  },
+                ],
+              "responses":
+                {
+                  "200": { "description": "successful operation" },
+                  "400": { "description": "Bad Request" },
+                  "404": { "description": "Not found" },
+                },
+            },
+          "post":
+            {
+              "tags": ["Governance"],
+              "summary": "Submit a proposal",
+              "requestBody":
+                {
+                  "content":
+                    {
+                      "application/json":
+                        {
+                          "schema": { "$ref": "#/components/schemas/Proposal" },
+                        },
+                    },
+                },
+              "responses":
+                {
+                  "200": { "description": "successful operation" },
+                  "400": { "description": "Bad Request" },
+                  "404": { "description": "Not found" },
+                },
+            },
+        },
+      "/gov/proposals{proposalId}":
+        {
+          "get":
+            {
+              "tags": ["Governance"],
+              "summary": "Query a particular proposal",
+              "parameters":
+                [
+                  {
+                    "name": "proposalId",
+                    "in": "path",
+                    "description": "ID of proposal to be queried",
+                    "schema": { "type": "string" },
+                    "required": true,
+                  },
+                ],
+              "responses":
+                {
+                  "200": { "description": "successful operation" },
+                  "400": { "description": "Bad Request" },
+                  "404": { "description": "Not found" },
+                },
+            },
+        },
+      "/gov/proposals{proposalId}/proposer":
+        {
+          "get":
+            {
+              "tags": ["Governance"],
+              "summary": "Query proposer",
+              "parameters":
+                [
+                  {
+                    "name": "proposalId",
+                    "in": "path",
+                    "description": "ID of proposal to be queried",
+                    "schema": { "type": "string" },
+                    "required": true,
+                  },
+                ],
+              "responses":
+                {
+                  "200": { "description": "successful operation" },
+                  "400": { "description": "Bad Request" },
+                  "404": { "description": "Not found" },
+                },
+            },
+        },
+      "/gov/proposals{proposalId}/deposits":
+        {
+          "get":
+            {
+              "tags": ["Governance"],
+              "summary": "Query deposits",
+              "parameters":
+                [
+                  {
+                    "name": "proposalId",
+                    "in": "path",
+                    "description": "ID of proposal to be queried",
+                    "schema": { "type": "string" },
+                    "required": true,
+                  },
+                ],
+              "responses":
+                {
+                  "200": { "description": "successful operation" },
+                  "400": { "description": "Bad Request" },
+                  "404": { "description": "Not found" },
+                },
+            },
+        },
+      "/gov/proposals{proposalId}/deposits/{depositor}":
+        {
+          "get":
+            {
+              "tags": ["Governance"],
+              "summary": "Query deposit",
+              "parameters":
+                [
+                  {
+                    "name": "proposalId",
+                    "in": "path",
+                    "description": "ID of proposal to be queried",
+                    "schema": { "type": "string" },
+                    "required": true,
+                  },
+                  {
+                    "name": "depositor",
+                    "in": "path",
+                    "description": "ID of depositor",
+                    "schema": { "type": "string" },
+                    "required": true,
+                  },
+                ],
+              "responses":
+                {
+                  "200": { "description": "successful operation" },
+                  "400": { "description": "Bad Request" },
+                  "404": { "description": "Not found" },
+                },
+            },
+        },
+      "/gov/proposals{proposalId}/votes":
+        {
+          "get":
+            {
+              "tags": ["Governance"],
+              "summary": "Query Voters information by proposal ID",
+              "parameters":
+                [
+                  {
+                    "name": "proposalId",
+                    "in": "path",
+                    "description": "ID of proposal to be queried",
+                    "schema": { "type": "string" },
+                    "required": true,
+                  },
+                ],
+              "responses":
+                {
+                  "200": { "description": "successful operation" },
+                  "400": { "description": "Bad Request" },
+                  "404": { "description": "Not found" },
+                },
+            },
+          "post":
+            {
+              "tags": ["Governance"],
+              "summary": "Send transaction to vote a proposal",
+              "parameters":
+                [
+                  {
+                    "name": "proposalId",
+                    "in": "path",
+                    "description": "ID of proposal to be queried",
+                    "schema": { "type": "string" },
+                    "required": true,
+                  },
+                ],
+              "requestBody":
+                {
+                  "content":
+                    {
+                      "application/json":
+                        { "schema": { "$ref": "#/components/schemas/Vote" } },
+                    },
+                },
+              "responses":
+                {
+                  "200": { "description": "successful operation" },
+                  "400": { "description": "Bad Request" },
+                  "404": { "description": "Not found" },
+                },
+            },
+        },
+      "/gov/proposals{proposalId}/votes/{voter}":
+        {
+          "get":
+            {
+              "tags": ["Governance"],
+              "summary": "Query Vote information by proposal ID and voter address",
+              "parameters":
+                [
+                  {
+                    "name": "proposalId",
+                    "in": "path",
+                    "description": "ID of proposal to be queried",
+                    "schema": { "type": "string" },
+                    "required": true,
+                  },
+                  {
+                    "name": "voter",
+                    "in": "path",
+                    "description": "Voter address",
+                    "schema": { "type": "string" },
+                    "required": true,
+                  },
+                ],
+              "responses":
+                {
+                  "200": { "description": "successful operation" },
+                  "400": { "description": "Bad Request" },
+                  "404": { "description": "Not found" },
+                },
+            },
+        },
+      "/gov/proposals{proposalId}/tally":
+        {
+          "get":
+            {
+              "tags": ["Governance"],
+              "summary": "Get a proposals tally result at current time",
+              "parameters":
+                [
+                  {
+                    "name": "proposalId",
+                    "in": "path",
+                    "description": "ID of proposal to be queried",
+                    "schema": { "type": "string" },
+                    "required": true,
+                  },
+                ],
+              "responses":
+                {
+                  "200": { "description": "successful operation" },
+                  "400": { "description": "Bad Request" },
+                  "404": { "description": "Not found" },
+                },
+            },
+        },
+      "/gov/parameters/deposit":
+        {
+          "get":
+            {
+              "tags": ["Governance"],
+              "summary": "Query governance deposit parameters",
+              "responses":
+                {
+                  "200": { "description": "successful operation" },
+                  "400": { "description": "Bad Request" },
+                  "404": { "description": "Not found" },
+                },
+            },
+        },
+      "/gov/parameters/tallying":
+        {
+          "get":
+            {
+              "tags": ["Governance"],
+              "summary": "Query governance deposit parameters",
+              "responses":
+                {
+                  "200": { "description": "successful operation" },
+                  "400": { "description": "Bad Request" },
+                  "404": { "description": "Not found" },
+                },
+            },
+        },
+      "/gov/parameters/voting":
+        {
+          "get":
+            {
+              "tags": ["Governance"],
+              "summary": "Query governance voting parameters",
+              "responses":
+                {
+                  "200": { "description": "successful operation" },
+                  "400": { "description": "Bad Request" },
+                  "404": { "description": "Not found" },
+                },
+            },
+        },
+      "/distribution/delegators/{delegatorAddr}/rewards":
+        {
+          "get":
+            {
+              "tags": ["Distribution"],
+              "summary": "Get the sum of all the rewards earned by delegations by a single delegator",
+              "parameters":
+                [
+                  {
+                    "name": "delegatorAddr",
+                    "in": "path",
+                    "description": "Address of Delegator",
+                    "schema": { "type": "string" },
+                    "required": true,
+                  },
+                ],
+              "responses":
+                {
+                  "200": { "description": "successful operation" },
+                  "400": { "description": "Bad Request" },
+                  "404": { "description": "Not found" },
+                },
+            },
+          "post":
+            {
+              "tags": ["Governance"],
+              "summary": "Submit a proposal",
+              "parameters":
+                [
+                  {
+                    "name": "delegatorAddr",
+                    "in": "path",
+                    "description": "Address of Delegator",
+                    "schema": { "type": "string" },
+                    "required": true,
+                  },
+                ],
+              "requestBody":
+                {
+                  "content":
+                    {
+                      "application/json":
+                        {
+                          "schema": { "$ref": "#/components/schemas/Rewards" },
+                        },
+                    },
+                },
+              "responses":
+                {
+                  "200": { "description": "successful operation" },
+                  "400": { "description": "Bad Request" },
+                  "404": { "description": "Not found" },
+                },
+            },
+        },
+      "/distribution/delegators/{delegatorAddr}/rewards/{validatorAddr}":
+        {
+          "get":
+            {
+              "tags": ["Distribution"],
+              "summary": "Query a single delegation reward by a delegator",
+              "parameters":
+                [
+                  {
+                    "name": "delegatorAddr",
+                    "in": "path",
+                    "description": "Address of Delegator",
+                    "schema": { "type": "string" },
+                    "required": true,
+                  },
+                  {
+                    "name": "validatorAddr",
+                    "in": "path",
+                    "description": "Address of Validator",
+                    "schema": { "type": "string" },
+                    "required": true,
+                  },
+                ],
+              "responses":
+                {
+                  "200": { "description": "successful operation" },
+                  "400": { "description": "Bad Request" },
+                  "404": { "description": "Not found" },
+                },
+            },
+          "post":
+            {
+              "tags": ["Distribution"],
+              "summary": "Query a single delegation reward by a delegator",
+              "parameters":
+                [
+                  {
+                    "name": "delegatorAddr",
+                    "in": "path",
+                    "description": "Address of Delegator",
+                    "schema": { "type": "string" },
+                    "required": true,
+                  },
+                  {
+                    "name": "validatorAddr",
+                    "in": "path",
+                    "description": "Address of Validator",
+                    "schema": { "type": "string" },
+                    "required": true,
+                  },
+                ],
+              "requestBody":
+                {
+                  "content":
+                    {
+                      "application/json":
+                        {
+                          "schema": { "$ref": "#/components/schemas/Rewards" },
+                        },
+                    },
+                },
+              "responses":
+                {
+                  "200": { "description": "successful operation" },
+                  "400": { "description": "Bad Request" },
+                  "404": { "description": "Not found" },
+                },
+            },
+        },
+      "/distribution/delegators/{delegatorAddr}/withdraw_address":
+        {
+          "get":
+            {
+              "tags": ["Distribution"],
+              "summary": "Get the delegations rewards withdrawal address",
+              "parameters":
+                [
+                  {
+                    "name": "delegatorAddr",
+                    "in": "path",
+                    "description": "Address of Delegator",
+                    "schema": { "type": "string" },
+                    "required": true,
+                  },
+                ],
+              "responses":
+                {
+                  "200": { "description": "successful operation" },
+                  "400": { "description": "Bad Request" },
+                  "404": { "description": "Not found" },
+                },
+            },
+          "post":
+            {
+              "tags": ["Distribution"],
+              "summary": "Replace the rewards withdrawal address",
+              "parameters":
+                [
+                  {
+                    "name": "delegatorAddr",
+                    "in": "path",
+                    "description": "Address of Delegator",
+                    "schema": { "type": "string" },
+                    "required": true,
+                  },
+                ],
+              "requestBody":
+                {
+                  "content":
+                    {
+                      "application/json":
+                        {
+                          "schema":
+                            {
+                              "$ref": "#/components/schemas/Withdrawal_Address",
+                            },
+                        },
+                    },
+                },
+              "responses":
+                {
+                  "200": { "description": "successful operation" },
+                  "400": { "description": "Bad Request" },
+                  "404": { "description": "Not found" },
+                },
+            },
+        },
+      "/distribution/validators/{validatorAddr}":
+        {
+          "get":
+            {
+              "tags": ["Distribution"],
+              "summary": "Query the distribution information of a single validator",
+              "parameters":
+                [
+                  {
+                    "name": "validatorAddr",
+                    "in": "path",
+                    "description": "Address of Validator",
+                    "schema": { "type": "string" },
+                    "required": true,
+                  },
+                ],
+              "responses":
+                {
+                  "200": { "description": "successful operation" },
+                  "400": { "description": "Bad Request" },
+                  "404": { "description": "Not found" },
+                },
+            },
+        },
+      "/distribution/validators/{validatorAddr}/outstanding_rewards":
+        {
+          "get":
+            {
+              "tags": ["Distribution"],
+              "summary": "Fee distribution outsdtanding rewards of a single validator",
+              "parameters":
+                [
+                  {
+                    "name": "validatorAddr",
+                    "in": "path",
+                    "description": "Address of Validator",
+                    "schema": { "type": "string" },
+                    "required": true,
+                  },
+                ],
+              "responses":
+                {
+                  "200": { "description": "successful operation" },
+                  "400": { "description": "Bad Request" },
+                  "404": { "description": "Not found" },
+                },
+            },
+        },
+      "/distribution/validators/{validatorAddr}/rewards":
+        {
+          "get":
+            {
+              "tags": ["Distribution"],
+              "summary": "Query the commission and self-delegation rewards of validator.",
+              "parameters":
+                [
+                  {
+                    "name": "validatorAddr",
+                    "in": "path",
+                    "description": "Address of Validator",
+                    "schema": { "type": "string" },
+                    "required": true,
+                  },
+                ],
+              "responses":
+                {
+                  "200": { "description": "successful operation" },
+                  "400": { "description": "Bad Request" },
+                  "404": { "description": "Not found" },
+                },
+            },
+        },
+      "/distribution/validators/community_pool":
+        {
+          "get":
+            {
+              "tags": ["Distribution"],
+              "summary": "Commmunity Pool Parameters",
+              "responses":
+                {
+                  "200": { "description": "successful operation" },
+                  "400": { "description": "Bad Request" },
+                  "404": { "description": "Not found" },
+                },
+            },
+        },
+      "/distribution/validators/parameters":
+        {
+          "get":
+            {
+              "tags": ["Distribution"],
+              "summary": "Fee division parameters",
+              "responses":
+                {
+                  "200": { "description": "successful operation" },
+                  "400": { "description": "Bad Request" },
+                  "404": { "description": "Not found" },
+                },
+            },
+        },
+      "/txs":
+        {
+          "post":
+            {
+              "tags": ["Transactions"],
+              "summary": "Broadcast a signed transaction",
+              "requestBody":
+                {
+                  "description": "Broadcast a signed transaction",
+                  "content":
+                    {
+                      "application/json":
+                        {
+                          "schema":
+                            { "$ref": "#/components/schemas/Transaction" },
+                        },
+                    },
+                  "required": true,
+                },
+              "responses":
+                {
+                  "200": { "description": "successful operation" },
+                  "400": { "description": "Bad Request" },
+                  "404": { "description": "Not found" },
+                },
+            },
+        },
+      "/sign":
+        {
+          "post":
+            {
+              "tags": ["Transaction"],
+              "summary": "Sign your transaction to broadcast the transaction",
+              "requestBody":
+                {
+                  "description": "Sign your transaction to broadcast the transaction",
+                  "content":
+                    {
+                      "application/json":
+                        { "schema": { "$ref": "#/components/schemas/Sign" } },
+                    },
+                  "required": true,
+                },
+              "responses":
+                {
+                  "200": { "description": "successful operation" },
+                  "400": { "description": "Bad Request" },
+                  "404": { "description": "Not found" },
+                },
+            },
+        },
+    },
+  "components":
+    {
+      "schemas":
+        {
+          "Transaction":
+            {
+              "type": "object",
+              "properties":
+                {
+                  "tx":
+                    {
+                      "type": "object",
+                      "properties":
+                        {
+                          "msg":
+                            {
+                              "type": "array",
+                              "items":
+                                { "$ref": "#/components/schemas/Message" },
+                            },
+                          "fee":
+                            {
+                              "type": "object",
+                              "properties":
+                                {
+                                  "amount":
+                                    {
+                                      "type": "array",
+                                      "items": { "type": "string" },
+                                    },
+                                  "gas": { "type": "string" },
+                                },
+                            },
+                          "signatures":
+                            {
+                              "type": "array",
+                              "items":
+                                { "$ref": "#/components/schemas/Signature" },
+                            },
+                          "memo": { "type": "string" },
+                        },
+                    },
+                  "mode":
+                    {
+                      "type": "string",
+                      "example": "<insert block, async or sync>",
+                    },
+                },
+            },
+          "Message":
+            {
+              "type": "object",
+              "properties":
+                {
+                  "type":
+                    {
+                      "type": "string",
+                      "example": "<Insert Send Message type here>",
+                    },
+                  "value":
+                    {
+                      "type": "object",
+                      "properties":
+                        {
+                          "from_address":
+                            {
+                              "type": "string",
+                              "example": "<Insert From Address type here>",
+                            },
+                          "to_address":
+                            {
+                              "type": "string",
+                              "example": "<Insert To Address type here>",
+                            },
+                          "amount":
+                            {
+                              "type": "array",
+                              "items":
+                                { "$ref": "#/components/schemas/Amount" },
+                            },
+                        },
+                    },
+                },
+            },
+          "Signature":
+            {
+              "type": "object",
+              "properties":
+                {
+                  "pub_key":
+                    {
+                      "type": "object",
+                      "properties":
+                        {
+                          "type":
+                            {
+                              "type": "string",
+                              "example": "tendermint/PubKeySecp256k1",
+                            },
+                          "value":
+                            {
+                              "type": "string",
+                              "example": "<insert value recieved in signed tx response>",
+                            },
+                        },
+                    },
+                  "signature":
+                    {
+                      "type": "string",
+                      "example": "<insert signature recieved in signed tx response>",
+                    },
+                },
+            },
+          "Amount":
+            {
+              "type": "object",
+              "properties":
+                {
+                  "denom": { "type": "string", "example": "umntl" },
+                  "amount":
+                    { "type": "string", "example": "<Insert amount here>" },
+                },
+            },
+          "Sign":
+            {
+              "type": "object",
+              "properties":
+                {
+                  "baseReq":
+                    {
+                      "type": "object",
+                      "properties":
+                        {
+                          "from": { "type": "string" },
+                          "chain_id": { "type": "string" },
+                        },
+                    },
+                  "type": { "type": "string" },
+                  "value":
+                    {
+                      "type": "object",
+                      "properties":
+                        {
+                          "msg":
+                            {
+                              "type": "array",
+                              "items":
+                                { "$ref": "#/components/schemas/Message" },
+                            },
+                          "fee":
+                            {
+                              "type": "object",
+                              "properties":
+                                {
+                                  "amount":
+                                    {
+                                      "type": "array",
+                                      "items": { "type": "string" },
+                                    },
+                                  "gas": { "type": "string" },
+                                },
+                            },
+                          "signatures": { "type": "string" },
+                          "memo": { "type": "string" },
+                        },
+                    },
+                },
+            },
+          "Delegation":
+            {
+              "type": "object",
+              "properties":
+                {
+                  "base_req":
+                    {
+                      "type": "object",
+                      "properties":
+                        {
+                          "from": { "type": "string" },
+                          "memo": { "type": "string" },
+                          "chain_id": { "type": "string" },
+                          "account_number": { "type": "string" },
+                          "sequence": { "type": "string" },
+                          "gas": { "type": "string" },
+                          "gas_adjustment": { "type": "string" },
+                          "fees":
+                            {
+                              "type": "array",
+                              "items":
+                                {
+                                  "type": "object",
+                                  "properties":
+                                    {
+                                      "denom": { "type": "string" },
+                                      "amount": { "type": "string" },
+                                    },
+                                },
+                            },
+                          "simulate": { "type": "boolean" },
+                        },
+                    },
+                  "delegator_address": { "type": "string" },
+                  "validator_address": { "type": "string" },
+                  "delegation":
+                    {
+                      "type": "object",
+                      "properties":
+                        {
+                          "denom": { "type": "string" },
+                          "amount": { "type": "string" },
+                        },
+                    },
+                },
+            },
+          "Unbonding_Delegation":
+            {
+              "type": "object",
+              "properties":
+                {
+                  "base_req":
+                    {
+                      "type": "object",
+                      "properties":
+                        {
+                          "from": { "type": "string" },
+                          "memo": { "type": "string" },
+                          "chain_id": { "type": "string" },
+                          "account_number": { "type": "string" },
+                          "sequence": { "type": "string" },
+                          "gas": { "type": "string" },
+                          "gas_adjustment": { "type": "string" },
+                          "fees":
+                            {
+                              "type": "array",
+                              "items":
+                                {
+                                  "type": "object",
+                                  "properties":
+                                    {
+                                      "denom": { "type": "string" },
+                                      "amount": { "type": "string" },
+                                    },
+                                },
+                            },
+                          "simulate": { "type": "boolean" },
+                        },
+                    },
+                  "delegator_address": { "type": "string" },
+                  "validator_address": { "type": "string" },
+                  "shares": { "type": "string" },
+                },
+            },
+          "Proposal":
+            {
+              "type": "object",
+              "properties":
+                {
+                  "base_req":
+                    {
+                      "type": "object",
+                      "properties":
+                        {
+                          "from": { "type": "string" },
+                          "memo": { "type": "string" },
+                          "chain_id": { "type": "string" },
+                          "account_number": { "type": "string" },
+                          "sequence": { "type": "string" },
+                          "gas": { "type": "string" },
+                          "gas_adjustment": { "type": "string" },
+                          "fees":
+                            {
+                              "type": "array",
+                              "items":
+                                {
+                                  "type": "object",
+                                  "properties":
+                                    {
+                                      "denom": { "type": "string" },
+                                      "amount": { "type": "string" },
+                                    },
+                                },
+                            },
+                          "simulate": { "type": "boolean" },
+                        },
+                    },
+                  "title": { "type": "string" },
+                  "description": { "type": "string" },
+                  "proposal_type": { "type": "string" },
+                  "proposer": { "type": "string" },
+                  "initial_deposit":
+                    {
+                      "type": "array",
+                      "items":
+                        {
+                          "type": "object",
+                          "properties":
+                            {
+                              "denom": { "type": "string" },
+                              "amount": { "type": "string" },
+                            },
+                        },
+                    },
+                },
+            },
+          "Vote":
+            {
+              "type": "object",
+              "properties":
+                {
+                  "base_req":
+                    {
+                      "type": "object",
+                      "properties":
+                        {
+                          "from": { "type": "string" },
+                          "memo": { "type": "string" },
+                          "chain_id": { "type": "string" },
+                          "account_number": { "type": "string" },
+                          "sequence": { "type": "string" },
+                          "gas": { "type": "string" },
+                          "gas_adjustment": { "type": "string" },
+                          "fees":
+                            {
+                              "type": "array",
+                              "items":
+                                {
+                                  "type": "object",
+                                  "properties":
+                                    {
+                                      "denom": { "type": "string" },
+                                      "amount": { "type": "string" },
+                                    },
+                                },
+                            },
+                          "simulate": { "type": "boolean" },
+                        },
+                    },
+                  "voter": { "type": "string" },
+                  "option": { "type": "string" },
+                },
+            },
+          "Rewards":
+            {
+              "type": "object",
+              "properties":
+                {
+                  "base_req":
+                    {
+                      "type": "object",
+                      "properties":
+                        {
+                          "from": { "type": "string" },
+                          "memo": { "type": "string" },
+                          "chain_id": { "type": "string" },
+                          "account_number": { "type": "string" },
+                          "sequence": { "type": "string" },
+                          "gas": { "type": "string" },
+                          "gas_adjustment": { "type": "string" },
+                          "fees":
+                            {
+                              "type": "array",
+                              "items":
+                                {
+                                  "type": "object",
+                                  "properties":
+                                    {
+                                      "denom": { "type": "string" },
+                                      "amount": { "type": "string" },
+                                    },
+                                },
+                            },
+                          "simulate": { "type": "boolean" },
+                        },
+                    },
+                },
+            },
+          "Withdrawal_Address":
+            {
+              "type": "object",
+              "properties":
+                {
+                  "base_req":
+                    {
+                      "type": "object",
+                      "properties":
+                        {
+                          "from": { "type": "string" },
+                          "memo": { "type": "string" },
+                          "chain_id": { "type": "string" },
+                          "account_number": { "type": "string" },
+                          "sequence": { "type": "string" },
+                          "gas": { "type": "string" },
+                          "gas_adjustment": { "type": "string" },
+                          "fees":
+                            {
+                              "type": "array",
+                              "items":
+                                {
+                                  "type": "object",
+                                  "properties":
+                                    {
+                                      "denom": { "type": "string" },
+                                      "amount": { "type": "string" },
+                                    },
+                                },
+                            },
+                          "simulate": { "type": "boolean" },
+                        },
+                    },
+                },
+            },
+        },
+    },
+}
