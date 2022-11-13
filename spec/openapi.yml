@@ -73,7 +73,7 @@ paths:
         description: OK
       "500":
         description: Internal Server Error
-  "/supply/total":
+"/supply/total":
       get:
         tags:
         - Supply
@@ -83,17 +83,22 @@ paths:
         description: OK
       "500":
         description: Internal Server Error
-  "​/supply​/total​/{denomination}":
+"​/supply​/total​/{denomination}":
       get:
         tags:
         - Supply
       summary: Get the total denomination
+      - name: total denomination of the block
+          in: path
+          description: total denomination
+          schema:
+            type: string
       responses:
       "200":
         description: OK
       "400":
         description: Invalid Coin Denomination
-  "/cosmos/base/tendermint/v1beta1/blocks/latest":
+"/cosmos/base/tendermint/v1beta1/blocks/latest":
         get:
           tags:
           - Service
@@ -103,7 +108,22 @@ paths:
           description: OK
         "default":
           description: Get An unexpected error response.
- "/cosmos/base/tendermint/v1beta1/blocks/{height}":
+"/cosmos/base/tendermint/v1beta1/blocks/{height}":
+        get:
+          tags:
+          - Service
+        summary: Get the block height
+        - name: height of the block
+          in: path
+          description: get the height of block
+          schema:
+            type: string
+        responses:
+        "200":
+          description: OK
+        "default":
+          description: Get An unexpected error response.
+"/cosmos/base/tendermint/v1beta1/syncing":
         get:
           tags:
           - Service
@@ -113,7 +133,7 @@ paths:
           description: OK
         "default":
           description: Get An unexpected error response.
- "/cosmos/base/tendermint/v1beta1/syncing":
+"/cosmos/base/tendermint/v1beta1/validatorsets/latest":
         get:
           tags:
           - Service
@@ -123,7 +143,22 @@ paths:
           description: OK
         "default":
           description: Get An unexpected error response.
- "/cosmos/base/tendermint/v1beta1/validatorsets/latest":
+"/cosmos/base/tendermint/v1beta1/validatorsets/{height}":
+        get:
+          tags:
+          - Service
+        summary: Get the height of validator set
+        - name: height of validator set
+          in: path
+          description: height of validator set
+          schema:
+            type: string
+        responses:
+        "200":
+          description: OK
+        "default":
+          description: Get An unexpected error response.
+"/cosmos​/tx​/v1beta1​/txs":
         get:
           tags:
           - Service
@@ -133,375 +168,393 @@ paths:
           description: OK
         "default":
           description: Get An unexpected error response.
- "/cosmos/base/tendermint/v1beta1/validatorsets/{height}":
+"/cosmos/tx/v1beta1/txs/{hash}":
         get:
           tags:
           - Service
-        summary: 
-        responses:
-        "200":
-          description: OK
-        "default":
-          description: Get An unexpected error response.
- "/cosmos​/tx​/v1beta1​/txs":
-        get:
-          tags:
-          - Service
-        summary: 
-        responses:
-        "200":
-          description: OK
-        "default":
-          description: Get An unexpected error response.
-  "/cosmos/tx/v1beta1/txs/{hash}":
-        get:
-          tags:
-          - Service
-        summary: GetTx fetches a tx by hash.
+        summary: Get Tx fetches a tx by hash.
+        - name: fetches a tx by hash
+          in: path
+          description: mint module parameters
+          schema:
+            type: string
         responses:
         "200":
           description: OK
         "default":
           description: An unexpected error response
-  "/cosmos/auth/v1beta1/accounts/{address}":
+"/cosmos/auth/v1beta1/accounts/{address}":
         get:
           tags:
           - Query
         summary: Get account returns account details based on address
+        - name: address of the account
+          in: path
+          description: get the address of the account
+          schema:
+            type: string
         responses:
         "200":
           description: A successful response
         "default":
           description: An unexpected error response
-  "/cosmos/auth/v1beta1/params":
+"/cosmos/auth/v1beta1/params":
         get:
           tags:
           - Query
         summary: Params queries of all parameters
-         responses:
+        responses:
         "200":
           description: A successful response
         "default":
           description: An unexpected error response
-  "/cosmos/bank/v1beta1/balances/{address}":
+"/cosmos/bank/v1beta1/balances/{address}":
         get:
           tags:
           - Query
         summary: All balances addresses
-         responses:
+        - name: all balances address
+          in: path
+          description: get all balances address
+          schema:
+            type: string
+        responses:
         "200":
           description: A successful response
         "default":
           description: An unexpected error response
-  "/cosmos/bank/v1beta1/balances/{address}/{denom}":
+"/cosmos/bank/v1beta1/balances/{address}/{denom}":
         get:
          tags:
           - Query
         summary: All balances addresses denominators
-         responses:
+        - name: all balances addresses
+          in: path
+          description: get all balances addresses
+          schema:
+            type: string
+        responses:
         "200":
           description: A successful response
         "default":
           description: An unexpected error response
-  ​"/cosmos​/bank​/v1beta1​/params":
+​"/cosmos​/bank​/v1beta1​/params":
         get:
          tags:
           - Query
         summary: All params
-         responses:
+        responses:
         "200":
           description: A successful response
         "default":
           description: An unexpected error response
-  "/cosmos/bank/v1beta1/supply":
+"/cosmos/bank/v1beta1/supply":
         get:
          tags:
           - Query
         summary: Total supply 
-         responses:
+        responses:
         "200":
           description: A successful response
         "default":
           description: An unexpected error response
-  "/cosmos/bank/v1beta1/supply/{denom}":
+"/cosmos/bank/v1beta1/supply/{denom}":
         get:
          tags:
           - Query
-        summary: Total supply denoms 
-         responses:
+        summary: Total supply denoms
+        - name: total supply denoms
+          in: path
+          description: mint module parameters
+          schema:
+            type: string 
+        responses:
         "200":
           description: A successful response
         "default":
           description: An unexpected error response
-  "/cosmos/distribution/v1beta1/community_pool":
+"/cosmos/distribution/v1beta1/community_pool":
         get:
          tags:
           - Query
         summary: Total community pool 
-         responses:
+        responses:
         "200":
           description: A successful response
         "default":
           description: An unexpected error response
-  "/cosmos/distribution/v1beta1/delegators/{delegator_address}/rewards":
+"/cosmos/distribution/v1beta1/delegators/{delegator_address}/rewards":
         get:
          tags:
           - Query
         summary: Total delegation address 
-         responses:
+        - name: delegation address
+          in: path
+          description: get the delegation address
+          schema:
+            type: string
+        responses:
         "200":
           description: A successful response
         "default":
           description: An unexpected error response
-  "/cosmos/distribution/v1beta1/delegators/{delegator_address}/rewards/{validator_address}":
+"/cosmos/distribution/v1beta1/delegators/{delegator_address}/rewards/{validator_address}":
          get:
          tags:
           - Query
-        summary: Total validator address 
+         summary: Total validator address
+         - name: validator address
+          in: path
+          description: get the validator address
+          schema:
+            type: string
          responses:
-        "200":
+          "200":
           description: A successful response
-        "default":
-          description: An unexpected error response
-  "/ibc/applications/transfer/v1beta1/params":
+          "default":
+            description: An unexpected error response
+"/ibc/applications/transfer/v1beta1/params":
          get:
          tags:
           - Query
-        summary: Total parameters
-         responses:
+summary: Total parameters
+responses:
         "200":
           description: A successful response
         "default":
           description: An unexpected error response 
-  ​"/ibc​/applications​/transfer​/v1beta1​/denom_traces​/{hash}":
+​"/ibc​/applications​/transfer​/v1beta1​/denom_traces​/{hash}":
         get:
          tags:
           - Query
         summary: Total parameters
-         responses:
+        responses:
         "200":
           description: A successful response
         "default":
           description: An unexpected error response 
-  "/ibc/applications/transfer/v1beta1/denom_traces":
+"/ibc/applications/transfer/v1beta1/denom_traces":
         get:
          tags:
           - Query
         summary: Total denom traces
-         responses:
+        responses:
         "200":
           description: A successful response
         "default":
           description: An unexpected error response
-  "/ibc/core/connection/v1beta1/connections/{connection_id}/consensus_state/revision/{revision_number}/height/{revision_height}":
+"/ibc/core/connection/v1beta1/connections/{connection_id}/consensus_state/revision/{revision_number}/height/{revision_height}":
         get:
          tags:
           - Query
         summary: Total revision heights
-         responses:
+        - name: revision heights
+          in: path
+          description: get total revision heights
+          schema:
+            type: string
+        responses:
         "200":
           description: A successful response
         "default":
           description: An unexpected error response
-  "/ibc/core/connection/v1beta1/connections/{connection_id}/client_state":
-         get:
-         tags:
-          - Query
-        summary: Total client state
-         responses:
-        "200":
-          description: A successful response
-        "default":
-          description: An unexpected error response
-  "/ibc/core/connection/v1beta1/connections/{connection_id}":
+"/ibc/core/connection/v1beta1/connections/{connection_id}/client_state":
         get:
          tags:
           - Query
-        summary: Total connection id
-         responses:
+        summary: Total client state
+        - name: connection id
+          in: path
+          description: get the connection id
+          schema:
+            type: string
+        responses:
         "200":
           description: A successful response
         "default":
           description: An unexpected error response
-  "/ibc/core/connection/v1beta1/client_connections/{client_id}":
+"/ibc/core/connection/v1beta1/client_connections/{client_id}":
         get:
          tags:
           - Query
         summary: Total client id
-         responses:
+        - name: client id
+          in: path
+          description: get the client id
+          schema:
+            type: string
+        responses:
         "200":
           description: A successful response
         "default":
           description: An unexpected error response
-  "/ibc/core/client/v1beta1/consensus_states/{client_id}/revision/{revision_number}/height/{revision_height}":
+"/ibc/core/client/v1beta1/consensus_states/{client_id}/revision/{revision_number}/height/{revision_height}":
         get:
          tags:
           - Query
         summary: Total revision height
-         responses:
+        responses:
         "200":
           description: A successful response
         "default":
           description: An unexpected error response
-  ​"/ibc​/core​/client​/v1beta1​/consensus_states​/{client_id}":
-         get:
+​"/ibc​/core​/client​/v1beta1​/consensus_states​/{client_id}":
+        get:
          tags:
           - Query
         summary: Total client id
-         responses:
+        responses:
         "200":
           description: A successful response
         "default":
           description: An unexpected error response
-  "/ibc/core/client/v1beta1/client_states":
-         get:
+"/ibc/core/client/v1beta1/client_states":
+        get:
          tags:
           - Query
         summary: Total client states
-         responses:
+        responses:
         "200":
           description: A successful response
         "default":
           description: An unexpected error response
-  "/ibc/client/v1beta1/params":
+"/ibc/client/v1beta1/params":
         get:
          tags:
           - Query
         summary: Total parameters
-         responses:
+        responses:
         "200":
           description: A successful response
         "default":
           description: An unexpected error response
-  "/ibc/core/channel/v1beta1/connections/{connection}/channels":
+"/ibc/core/channel/v1beta1/connections/{connection}/channels":
         get:
          tags:
           - Query
         summary: Total parameters
-         responses:
+        responses:
         "200":
           description: A successful response
         "default":
           description: An unexpected error response
-  "/ibc/core/channel/v1beta1/channels/{channel_id}/ports/{port_id}/packet_receipts/{sequence}":
-         get:
+"/ibc/core/channel/v1beta1/channels/{channel_id}/ports/{port_id}/packet_receipts/{sequence}":
+        get:
          tags:
           - Query
         summary: Total sequence
-         responses:
+        responses:
         "200":
           description: A successful response
         "default":
           description: An unexpected error response
   
-  ​"/ibc​/core​/channel​/v1beta1​/channels​/{channel_id}​/ports​/{port_id}​/packet_commitments​/{packet_commitment_sequences}​/unreceived_packets":
+​"/ibc​/core​/channel​/v1beta1​/channels​/{channel_id}​/ports​/{port_id}​/packet_commitments​/{packet_commitment_sequences}​/unreceived_packets":
         get:
          tags:
           - Query
         summary: Total sequence
-         responses:
+        responses:
         "200":
           description: A successful response
         "default":
           description: An unexpected error response
-  "/ibc/core/channel/v1beta1/channels/{channel_id}/ports/{port_id}/packet_commitments/{packet_ack_sequences}/unreceived_packets":
-         get:
+"/ibc/core/channel/v1beta1/channels/{channel_id}/ports/{port_id}/packet_commitments/{packet_ack_sequences}/unreceived_packets":
+        get:
          tags:
           - Query
         summary: Total sequence
-         responses:
+        responses:
         "200":
           description: A successful response
         "default":
           description: An unexpected error response
-  "/ibc/core/channel/v1beta1/channels/{channel_id}/ports/{port_id}/packet_commitments":
-         get:
+"/ibc/core/channel/v1beta1/channels/{channel_id}/ports/{port_id}/packet_commitments":
+        get:
          tags:
           - Query
         summary: Total sequence
-         responses:
+        responses:
         "200":
           description: A successful response
         "default":
           description: An unexpected error response
-  "/ibc/core/channel/v1beta1/channels/{channel_id}/ports/{port_id}/packet_acks/{sequence}":
-         get:
+"/ibc/core/channel/v1beta1/channels/{channel_id}/ports/{port_id}/packet_acks/{sequence}":
+        get:
          tags:
           - Query
         summary: Total sequence
-         responses:
+        responses:
         "200":
           description: A successful response
         "default":
           description: An unexpected error response
-  
 ​"/ibc​/core​/channel​/v1beta1​/channels​/{channel_id}​/ports​/{port_id}​/consensus_state​/revision​/{revision_number}​/height​/{revision_height}":
-         get:
+        get:
          tags:
           - Query
         summary: Total sequence
-         responses:
+        responses:
         "200":
           description: A successful response
         "default":
           description: An unexpected error response
-  "/cosmos/upgrade/v1beta1/current_plan":
-          get:
+"/cosmos/upgrade/v1beta1/current_plan":
+        get:
          tags:
           - Query
         summary: Total plan
-         responses:
+        responses:
         "200":
           description: A successful response
         "default":
           description: An unexpected error response
-  ​"/cosmos​/upgrade​/v1beta1​/applied_plan​/{name}":
-      get:
+"/cosmos​/upgrade​/v1beta1​/applied_plan​/{name}":
+        get:
          tags:
           - Query
         summary: Total plan
-         responses:
+        responses:
         "200":
           description: A successful response
         "default":
           description: An unexpected error response
-  "/cosmos/staking/v1beta1/validators/{validator_addr}/unbonding_delegations":
-      get:
+"/cosmos/staking/v1beta1/validators/{validator_addr}/unbonding_delegations":
+        get:
          tags:
           - Query
         summary: Total plan
-         responses:
+        responses:
         "200":
           description: A successful response
         "default":
           description: An unexpected error response
-  "/cosmos/staking/v1beta1/validators/{validator_addr}/delegations/{delegator_addr}/unbonding_delegation":
-      get:
+"/cosmos/staking/v1beta1/validators/{validator_addr}/delegations/{delegator_addr}/unbonding_delegation":
+        get:
          tags:
           - Query
         summary: Total plan
-         responses:
+        responses:
         "200":
           description: A successful response
         "default":
           description: An unexpected error response
-  
-  ​"/cosmos​/staking​/v1beta1​/validators​/{validator_addr}​/delegations​/{delegator_addr}":
-       get:
+​"/cosmos​/staking​/v1beta1​/validators​/{validator_addr}​/delegations​/{delegator_addr}":
+        get:
          tags:
           - Query
         summary: Total plan
-         responses:
+        responses:
         "200":
           description: A successful response
         "default":
           description: An unexpected error response
-  "/cosmos/staking/v1beta1/validators/{validator_addr}/delegations":
-       get:
+"/cosmos/staking/v1beta1/validators/{validator_addr}/delegations":
+        get:
          tags:
           - Query
         summary: Total plan
-         responses:
+        responses:
         "200":
           description: A successful response
         "default":
