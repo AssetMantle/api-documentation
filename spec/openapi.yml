@@ -403,6 +403,11 @@ responses:
          tags:
           - Query
         summary: Total client id
+        - name: client id
+          in: path
+          description: get the client id
+          schema:
+            type: string
         responses:
         "200":
           description: A successful response
@@ -433,6 +438,11 @@ responses:
          tags:
           - Query
         summary: Total parameters
+        - name: client id
+          in: path
+          description: get the client id
+          schema:
+            type: string
         responses:
         "200":
           description: A successful response
@@ -464,6 +474,11 @@ responses:
          tags:
           - Query
         summary: Total sequence
+        - name: port id
+          in: path
+          description: get the port id
+          schema:
+            type: string
         responses:
         "200":
           description: A successful response
@@ -474,6 +489,11 @@ responses:
          tags:
           - Query
         summary: Total sequence
+        - name: port id
+          in: path
+          description: get the port id
+          schema:
+            type: string
         responses:
         "200":
           description: A successful response
@@ -484,6 +504,11 @@ responses:
          tags:
           - Query
         summary: Total sequence
+        - name: port id sequence
+          in: path
+          description: get the port id sequence
+          schema:
+            type: string
         responses:
         "200":
           description: A successful response
